@@ -26,3 +26,6 @@ else
 	echo "usage: show [file1] [file2] [etc...]"
 	echo "arguments should not include the two dots!"
 fi
+
+echo ""
+echo $(ls)

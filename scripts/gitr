@@ -1,0 +1,16 @@
+#!/bin/bash
+# This checks if the current working directory contains .git/ and if it does
+# it echos the path out. If it doesn't, it looks up one level etc until it finds it.
+
+shopt -s nullglob dotglob     # To include hidden files. Needed?
+
+DIR=${PWD}
+TARGET="$DIR/.git"
+
+until [ "$(ls -a $TARGET 2> /dev/null)" ] # 2> /dev/null suppresses errors
+do
+  DIR=`dirname $DIR`
+  TARGET="$DIR/.git"
+done
+
+echo $DIR

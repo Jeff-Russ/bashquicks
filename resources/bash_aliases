@@ -1,5 +1,14 @@
 # b is for bash
-alias brc='source ~/.bashrc'                        # bash rc: look at ~/.bashrc 
+alias brc='source ~/.bashrc'                          # bash rc: load ~/.bashrc 
+alias bex='chmod u+x'                                 # (make it) bash executable
+
+# p is for print (using cat)
+alias pba='cat ~/bash_scripts/resources/bash_aliases' # look at bash aliases
+alias pbr='cat ~/.bashrc'                             # look at bash resources
+alias pbs='cat ~/bash_scripts/scripts *'              # look at bash scripts
+
+# c9 is for the Cloud9 Ace editor
+alias c9ba='c9 ~/bash_scripts/resources/bash_aliases' # edit aliases
 
 # g is for git;  
 alias gmv='git mv'                                  # gmv git mv
@@ -11,7 +20,7 @@ alias gs='git status'                               # gs  git status;
 alias gu='git checkout --force; git status'         # gu  git undo
 alias gm='git merge'                                # gm  git merge;  
 alias gb='git branch'                               # gb  git branch;
-alias gpo='git push origin'                         # gpo git push origin; 
+alias gpo='git push origin'                         # gpo git push origin;
 
 # r is for ruby or rails;  
 alias rbu='bundle update'                           # rbu rails: bundle update;  
@@ -42,5 +51,9 @@ alias reg='c9 Gemfile'
 alias rer='c9 config/routes.rb'
 alias rem='c9 db/migrate/'
 alias res='c9 db/schema.rb'
+
+# Here are some more various mixed function aliases
+
+
 
 

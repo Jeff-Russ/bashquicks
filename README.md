@@ -28,19 +28,31 @@ and you should be ready to go!
 
 ## Bash Aliases
 
-If you are in Cloud9 and you want to edit them, type 'c9' instead of 'cat'
+If you are in Cloud9, run this to Print Bash Aliases:
 
-    $ cat ~/bash_scripts/resources/bash_aliases
+    $ pba
+    
+Or run this in Cloud9 to edit them:
+
+    $ c9ba
 
 If you make changes you can run this (defined in bash_aliases) command:
 
     $ brc
     
-## Scripts
+## Bash Scripts
 
 The scripts are well commented so If you'd like to learn what they do I suggest 
 looking at them directly. First get a list of them:
 
     $ nbs
     
-Then cat, vim, vi or c9 away.
+You can Print Bash Scripts, all of them, using cat with this:
+
+    $ pbs
+    
+# TODO
+
+1. script to navigate up to git project's root ~~DONE~~
+2. script to replace Gemfile and install
+3. script to delete Gemfile.lock and start over (from any dir without leaving)

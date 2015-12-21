@@ -8,3 +8,6 @@ do
 		mv -v $FILE ..$FILE
 	fi
 done
+
+echo ""
+echo $(ls)
