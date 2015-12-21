@@ -1,3 +1,5 @@
+# b is for bash
+alias brc='source ~/.bashrc'                        # bash rc: look at ~/.bashrc 
 
 # g is for git;  
 alias gmv='git mv'                                  # gmv git mv
@@ -31,6 +33,7 @@ alias rd='git push heroku master; heroku run rake db:migrate'    # rd  rails: de
 alias nr='cd /; ls -a'                           # nr  navigate: root;  
 alias nh='cd ~/; ls -a'                          # nh  navigate: home;  
 alias nw='cd ~/workspace; ls -a'                 # nw  navigate: workspace;  
+alias nbs='cd ~/bash_scripts; ls -a'             # nbs navigate: bash_scripts; 
 
 # re is for rails edit (this only makes sense if you use c9.io);
 alias rec='c9 app/controllers'
@@ -39,4 +42,5 @@ alias reg='c9 Gemfile'
 alias rer='c9 config/routes.rb'
 alias rem='c9 db/migrate/'
 alias res='c9 db/schema.rb'
+
 

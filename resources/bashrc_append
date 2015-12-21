@@ -1,4 +1,5 @@
 
+#jeffruss1
 # added automatically by ~/bash_scripts/install.sh
 if [ -f ~/bash_scripts/resources/bash_aliases ]; then
     . ~/bash_scripts/resources/bash_aliases
