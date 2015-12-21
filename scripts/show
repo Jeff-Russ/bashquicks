@@ -1,13 +1,5 @@
 #!/bin/bash
 # show
-for FILE in *
-do
-	if [[ $FILE == .* ]]; then
-		echo "Hidden file found"
-	else
-		mv -v $FILE ..$FILE
-	fi
-done
 args=("$@")
 MIN_ARGS=1
 if [ $# -ge $MIN_ARGS ]; then

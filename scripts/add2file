@@ -1,0 +1,9 @@
+#!/bin/bash
+# add a string to a file at a certain line if a string is not found in file
+# useage: add2file ['string match'] [filename] [line_numb] ['string insert']
+
+if grep -q $1 $2; then
+	echo "$1 found in $2"
+else
+	sed -i "$3 a $4" $2
+fi
