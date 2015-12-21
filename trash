@@ -1,0 +1,13 @@
+#!/bin/bash
+args=("$@")
+MIN_ARGS=1
+if [ $# -ge $MIN_ARGS ]; then
+    for FILE in "$@"
+    do
+        mv -v $FILE ~/workspace/.Trashes/
+    done
+else
+    echo " "
+    echo "Moves items to ~/workspace/.Trashes/"
+    echo "usage: trash [file1] [file2] [etc...]"
+fi

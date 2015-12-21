@@ -1,0 +1,10 @@
+#!/bin/bash
+# hideall 
+for FILE in *
+do
+	if [[ $FILE == .* ]]; then
+		echo ""
+	else
+		mv -v $FILE ..$FILE
+	fi
+done

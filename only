@@ -1,0 +1,37 @@
+#!/bin/bash
+# only 
+for FILE in *
+do
+	if [[ $FILE == .* ]]; then
+		echo "Hidden file found"
+	else
+		mv -v $FILE ..$FILE
+	fi
+done
+
+args=("$@")
+MIN_ARGS=1
+if [ $# -ge $MIN_ARGS ]; then
+    for FILE in "$@"
+    do 
+        mv -v ..$FILE `echo ..$FILE | cut -c3-`;
+    done
+else
+	echo " "
+	echo "hide will hide file(s) by adding two dots to the beginning."
+	echo "usage: hide [file1] [file2] [etc...]"
+	echo " "
+	echo "show will un-hide file(s) that start with two dots by removing them."
+	echo "usage: show [file1] [file2] [etc...]"
+	echo "arguments should not include the two dots!"
+	echo " "
+	echo "hideall will hide files by adding two dots to the beginning."
+	echo "hideall takes no arguments"
+	echo " "
+	echo "only will hide all files except those specified by argument(s)"
+	echo "usage: only [file1] [file2] [etc...]"
+	echo " "
+	echo "showall will un-hide all files with two dots by removing them."
+	echo "usage: show [file1] [file2] [etc...]"
+	echo "arguments should not include the two dots!"
+fi
