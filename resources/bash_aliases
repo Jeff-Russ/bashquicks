@@ -42,8 +42,9 @@ alias rd='git push heroku master; heroku run rake db:migrate'    # rd  rails: de
 alias nr='cd /; ls -a'                           # nr  navigate: root;  
 alias nh='cd ~/; ls -a'                          # nh  navigate: home;  
 alias nw='cd ~/workspace; ls -a'                 # nw  navigate: workspace;  
-alias nbs='cd ~/bashful_rails; ls -a'             # nbs navigate: bashful_rails; 
-alias ns='cd ~/bashful_rails/scripts; ls -a'      # ns navigate: bashful_rails/scripts/; 
+alias nbr='cd ~/bashful_rails; ls -a'            # nbr navigate: bashful_rails; 
+alias ns='cd ~/bashful_rails/scripts; ls -a'     # ns navigate: bashful_rails/scripts/; 
+alias ngr='. ngr_src; ls -a'                     # ngr navigate: git root;
 
 # re is for rails edit (this only makes sense if you use c9.io);
 alias rec='c9 app/controllers'

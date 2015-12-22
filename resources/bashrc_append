@@ -9,4 +9,17 @@ fi
 # added automatically by ~/bashful_rails/install.sh
 PATH="~/bashful_rails/scripts:${PATH}"
 
+function mycd {
+    if (( $# == 0 )); then
+        echo "usage: $FUNCNAME [1|2|3|...]"
+        return
+    fi
+    case $1 in
+        1) cd /tmp ;;
+        2) cd /a/very/long/path/name ;;
+        3) cd /some/where/else ;;
+        *) echo "unknown parameter" ;;
+    esac
+}
+
 #bashful_rails_end

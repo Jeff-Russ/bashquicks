@@ -24,8 +24,15 @@ then run:
 now in terminal:
 
     $ cd ~/bashful_rails; ./install.sh
-
+    
 and you should be ready to go!
+    
+If you are on Cloud9 you might want to make a soft link to the library on your 
+workspace with this:
+
+    $ ln -s ~/bashful_rails/ ~/workspace
+
+Keep in mind the limitations of soft links! http://linuxgazette.net/105/pitcher.html
 
 ## Bash Aliases
 

@@ -1,0 +1,28 @@
+#!/bin/bash
+# gr - execute at git root
+
+shopt -s nullglob dotglob     # To include hidden files. Needed?
+
+DIR=${PWD}
+TARGET="$DIR/.git"
+
+if (( $# == 0 )); then 
+  echo ""
+  echo "gr stands for 'git root'"
+  echo "gr allows you to execute anything root of (git) project without changing directory"
+  echo "useage: gr git status"
+  echo ""
+else
+# This checks if the current working directory contains .git/  
+  until [ "$(ls -a $TARGET 2> /dev/null)" ] # 2> /dev/null suppresses errors
+  do
+    DIR=`dirname $DIR` # .git not found. move up
+    TARGET="$DIR/.git" 
+  done
+  
+  function nav {
+      cd $1
+  }
+  
+  echo `nav $DIR; $@`
+fi

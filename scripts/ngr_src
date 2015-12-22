@@ -1,0 +1,18 @@
+#!/bin/bash
+# ngr - navigate to git root 
+# useage: . ngr
+# NOTE THE DOT!!
+
+shopt -s nullglob dotglob     # To include hidden files. Needed?
+
+DIR=${PWD}
+TARGET="$DIR/.git"
+   
+# This checks if the current working directory contains .git/  
+until [ "$(ls -a $TARGET 2> /dev/null)" ] # 2> /dev/null suppresses errors
+do
+  DIR=`dirname $DIR` # .git not found. move up
+  TARGET="$DIR/.git" 
+done
+
+cd $DIR
