@@ -36,7 +36,7 @@ alias rdm='bundle exec rake db:migrate'             # rr rake migrate;
 alias rc='bundle exec rails console'                # rc  rails console;  
 alias rhc='heroku run rails console'                # rhc rails heroku console;    
 alias rs='bundle exec rails server  -p $PORT -b $IP'             # rs  rails server;  
-alias rd='git push heroku master; heroku run rake db:migrate'    # rd  rails: deploy;
+alias rd='git push heroku master; heroku run rake db:migrate'    # rd  rails: depcd loy;
 
 # n is for navigate;  
 alias nr='cd /; ls -a'                           # nr  navigate: root;  
