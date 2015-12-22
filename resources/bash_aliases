@@ -43,6 +43,7 @@ alias nr='cd /; ls -a'                           # nr  navigate: root;
 alias nh='cd ~/; ls -a'                          # nh  navigate: home;  
 alias nw='cd ~/workspace; ls -a'                 # nw  navigate: workspace;  
 alias nbs='cd ~/bash_scripts; ls -a'             # nbs navigate: bash_scripts; 
+alias ns='cd ~/bash_scripts/scripts; ls -a'      # ns navigate: bash_scripts/scripts/; 
 
 # re is for rails edit (this only makes sense if you use c9.io);
 alias rec='c9 app/controllers'

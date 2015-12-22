@@ -56,3 +56,4 @@ You can Print Bash Scripts, all of them, using cat with this:
 1. script to navigate up to git project's root ~~DONE~~
 2. script to replace Gemfile and install
 3. script to delete Gemfile.lock and start over (from any dir without leaving)
+4. make commands that must be at git root work anywhere inside projectc9 
