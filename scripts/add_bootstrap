@@ -1,6 +1,8 @@
 #!/bin/bash
 # add boostrap to rails app
 
+# THIS FILE IS NOT COMPLETE
+
 if grep -q 'bootstrap-sass' 'Gemfile'; then
 	echo "bootstrap-sass found in Gemfile"
 else

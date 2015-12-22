@@ -3,13 +3,15 @@
 
 # adds all scripts and aliases to environment by appending the .bashrc file in ~/
 
-TOKEN="#jeffruss1"
+TOKEN="#bashful_rails_begin"
 TARGET=$HOME'/.bashrc'
-SOURCE=$HOME'/bash_scripts/resources/bashrc_append'
+SOURCE=$HOME'/bashful_rails/resources/bashrc_append'
 
 
 if grep -s $TOKEN $TARGET; then
-	echo "installation found. Remove lines from .bashrc and run again"
+	echo "Installation found! Remove lines from .bashrc and run again."
 else
 	cat $SOURCE >> $TARGET
+	echo `source ~/.bashrc`
+	echo "Installation complete!"
 fi

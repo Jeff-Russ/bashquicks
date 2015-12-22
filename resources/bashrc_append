@@ -1,9 +1,12 @@
 
-#jeffruss1
-# added automatically by ~/bash_scripts/install.sh
-if [ -f ~/bash_scripts/resources/bash_aliases ]; then
-    . ~/bash_scripts/resources/bash_aliases
+#bashful_rails_begin
+
+# added automatically by ~/bashful_rails/install.sh
+if [ -f ~/bashful_rails/resources/bash_aliases ]; then
+    . ~/bashful_rails/resources/bash_aliases
 fi
 
-# added automatically by ~/bash_scripts/install.sh
-PATH="~/bash_scripts/scripts:${PATH}"
+# added automatically by ~/bashful_rails/install.sh
+PATH="~/bashful_rails/scripts:${PATH}"
+
+#bashful_rails_end
