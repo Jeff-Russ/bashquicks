@@ -1,17 +1,17 @@
-# b is for bash
-alias brc='source ~/.bashrc'                          # bash rc: load ~/.bashrc 
-alias bex='chmod u+x'                                 # (make it) bash executable
+# b is for bash;
+alias brc='source ~/.bashrc'                          # bash rc: load ~/.bashrc;
+alias bex='chmod u+x'                                 # (make it) bash executable;
 
 # p is for print (using cat)
-alias pba='cat ~/bashful_rails/resources/bash_aliases' # look at bash aliases
-alias pbr='cat ~/.bashrc'                              # look at bash resources
-alias pbs='cat ~/bashful_rails/scripts *'              # look at bash scripts
+alias pba='cat ~/bashful_rails/resources/bash_aliases' # look at bash aliases;
+alias pbr='cat ~/.bashrc'                              # look at bash resources;
+alias pbs='cat ~/bashful_rails/scripts *'              # look at bash scripts;
 
-# c9 is for the Cloud9 Ace editor
-alias c9ba='c9 ~/bashful_rails/resources/bash_aliases' # edit aliases
+# c9 is for the Cloud9 Ace editor;
+alias c9ba='c9 ~/bashful_rails/resources/bash_aliases' # edit aliases;
 
 # g is for git;  
-alias gmv='git mv'                                  # gmv git mv
+alias gmv='git mv'                                  # gmv git mv;
 alias ga='git add . -A; git status'                 # ga  git add;  
 alias gac='git add . -A; git status; git commit -m' # gac git add commit;
 alias gcm='git commit --allow-empty -m'             # gcm git commit message
@@ -35,9 +35,12 @@ alias rdr='bundle exec rake db:reset'               # rr  rake db reset;
 alias rdm='bundle exec rake db:migrate'             # rr rake migrate; 
 alias rc='bundle exec rails console'                # rc  rails console;  
 alias rhc='heroku run rails console'                # rhc rails heroku console;    
-alias rs='bundle exec rails server  -p $PORT -b $IP'             # rs  rails server;  
-alias rd='git push heroku master; heroku run rake db:migrate'    # rd  rails: depcd loy;
+alias rs='bundle exec rails server  -p $PORT -b $IP'             # rs  rails server; 
+alias rpa='be rake assets:precompile RAILS_ENV=production' # rails precomile assets;
 
+alias rd='rpa; gac "precompile asset for production. About to deploy"; gpo master;
+    git push heroku master; heroku run rake db:migrate';  # rails deploy;
+           
 # n is for navigate;  
 alias nr='cd /; ls -a'                           # nr  navigate: root;  
 alias nh='cd ~/; ls -a'                          # nh  navigate: home;  
@@ -47,15 +50,18 @@ alias ns='cd ~/bashful_rails/scripts; ls -a'     # ns navigate: bashful_rails/sc
 alias ngr='. ngr_src; ls -a'                     # ngr navigate: git root;
 
 # re is for rails edit (this only makes sense if you use c9.io);
-alias rec='c9 app/controllers'
-alias rev='c9 app/views/'
-alias reg='c9 Gemfile'
-alias rer='c9 config/routes.rb'
-alias rem='c9 db/migrate/'
-alias res='c9 db/schema.rb'
+alias rec='c9 app/controllers';
+alias rev='c9 app/views/';
+alias reg='c9 Gemfile';
+alias rer='c9 config/routes.rb';
+alias rem='c9 db/migrate/';
+alias res='c9 db/schema.rb';
 
 # Here are some more various mixed function aliases
+alias rails.md='echo "https://private-jeff-russ.c9users.io/?aws=jeffruss/_rails"; rslp'
 
+
+alias rslp='cd ~/workspace/LivePage-md; bundle exec rails server -p $PORT -b $IP;';
 
 
 

@@ -1,5 +1,9 @@
 #!/bin/bash
 # only 
+# TODO there is a bug. Make script unhideall first!
+# reason: it cant "only" something that's not visible so it throws an error
+# and, for some reason, moves a bunch of folders.
+
 for FILE in *
 do
 	if [[ $FILE == .* ]]; then
