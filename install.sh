@@ -12,7 +12,7 @@ SOURCE=$HOME'/bashful_rails/resources/bashrc_append'
 
 
 if grep -s $TOKEN $TARGET; then
-	echo "Installation found! Remove lines from .bashrc and run again."
+	echo "Installation found! Remove lines from ~/.bashrc and run again."
 else
 	cat $SOURCE >> $TARGET
 	echo `source ~/.bashrc`

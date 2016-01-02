@@ -9,17 +9,22 @@ alias pbs='cat ~/bashful_rails/scripts *'              # look at bash scripts;
 
 # c9 is for the Cloud9 Ace editor;
 alias c9ba='c9 ~/bashful_rails/resources/bash_aliases' # edit aliases;
+alias gc9='git config --global core.editor "c9 --wait"' # git: c9 for commit messages
 
 # g is for git;  
 alias gmv='git mv'                                  # gmv git mv;
-alias ga='git add . -A; git status'                 # ga  git add;  
-alias gac='git add . -A; git status; git commit -m' # gac git add commit;
-alias gcm='git commit --allow-empty -m'             # gcm git commit message
 alias gc='git checkout'                             # gc  git checkout;  
 alias gs='git status'                               # gs  git status;  
 alias gu='git checkout --force; git status'         # gu  git undo
 alias gm='git merge'                                # gm  git merge;  
 alias gb='git branch'                               # gb  git branch;
+alias ga='git add . -A; git status'                 # ga  git add;  
+alias gcm='git commit -m'                           # gcm git commit message;
+alias gce='git commit'                              # gcm git commit (editor);
+alias gacm='ga; gcm'                                # gacm git add commit message;
+alias gace='ga; gce'                                # gace git add commit (editor);
+alias gracm='rpa; ga; gcm'                          # gracm git rails add commit message;
+alias grace='rpa; ga; gce'                          # grace git rails add commit (editor);
 alias gpo='git push origin'                         # gpo git push origin;
 
 # r is for ruby or rails;  
@@ -37,9 +42,11 @@ alias rc='bundle exec rails console'                # rc  rails console;
 alias rhc='heroku run rails console'                # rhc rails heroku console;    
 alias rs='bundle exec rails server  -p $PORT -b $IP'             # rs  rails server; 
 alias rpa='be rake assets:precompile RAILS_ENV=production' # rails precomile assets;
+alias rd='git push origin master; git push heroku master; heroku run rake db:migrate' # rails deploy;
 
-alias rd='rpa; gac "precompile asset for production. About to deploy"; gpo master;
-    git push heroku master; heroku run rake db:migrate';  # rails deploy;
+
+#alias rd='rpa; gac "precompile asset for production. About to deploy"; gpo master;
+#    git push heroku master; heroku run rake db:migrate';  # rails deploy;
            
 # n is for navigate;  
 alias nr='cd /; ls -a'                           # nr  navigate: root;  
@@ -61,7 +68,6 @@ alias res='c9 db/schema.rb';
 alias rails.md='echo "https://private-jeff-russ.c9users.io/?aws=jeffruss/_rails"; rslp'
 
 
-alias rslp='cd ~/workspace/LivePage-md; bundle exec rails server -p $PORT -b $IP;';
+alias run.md='cd ~/workspace/LivePage-md; bundle exec rails server -p $PORT -b $IP;';
 
-
-
+alias ger='ngr; c9 README.md'       # git edit readme
