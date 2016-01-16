@@ -1,0 +1,20 @@
+#!/bin/bash
+# s3swd - Sync Working Directory  
+# Sync files to Amazon AWS S3 bucket  
+# Current directory name must match bucket name!  
+
+destination="s3://${PWD##*/}";
+
+if [ -z "$1" ]; then
+   echo "running... $ aws s3 sync . $destination";
+   aws s3 sync . $destination;
+elif [ $1 == "r" ]; then
+   echo "running... $ aws s3 sync . $destination --acl public-read";
+   aws s3 sync . $destination --acl public-read;
+elif [ $1 == "w" ]; then
+   echo "running... $ aws s3 sync . $destination --acl public-read-write";
+   aws s3 sync . $destination --acl public-read-write;
+elif [ $1 == "p" ]; then
+   echo "running... $ aws s3 sync . $destination --acl public-private";
+   aws s3 sync . $destination --acl public-read-write;
+fi

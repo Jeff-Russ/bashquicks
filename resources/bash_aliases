@@ -1,14 +1,19 @@
+# br is for bashful rails
+alias br_install='cd ~/bashful_rails; ./install.sh; cd -' # install bashful rails
+alias bra='cat ~/bashful_rails/resources/bash_aliases' # look at bash aliases;
+alias brea='c9 ~/bashful_rails/resources/bash_aliases' # br edit aliases;
+alias nbr='cd ~/bashful_rails; ls -a'          # nbr navigate: bashful_rails; 
+alias nbrs='cd ~/bashful_rails/scripts; ls -a' # ns navigate: bashful_rails/scripts/; 
+alias brns='cd ~/bashful_rails/scripts; brns_src' # create a new empty script and open in c9  
+
 # b is for bash;
 alias brc='source ~/.bashrc'                          # bash rc: load ~/.bashrc;
 alias bex='chmod u+x'                                 # (make it) bash executable;
 
 # p is for print (using cat)
-alias pba='cat ~/bashful_rails/resources/bash_aliases' # look at bash aliases;
 alias pbr='cat ~/.bashrc'                              # look at bash resources;
-alias pbs='cat ~/bashful_rails/scripts *'              # look at bash scripts;
 
 # c9 is for the Cloud9 Ace editor;
-alias c9ba='c9 ~/bashful_rails/resources/bash_aliases' # edit aliases;
 alias gc9='git config --global core.editor "c9 --wait"' # git: c9 for commit messages
 
 # g is for git;  
@@ -19,6 +24,7 @@ alias gu='git checkout --force; git status'         # gu  git undo
 alias gm='git merge'                                # gm  git merge;  
 alias gb='git branch'                               # gb  git branch;
 alias ga='git add . -A; git status'                 # ga  git add;  
+alias gac='ga; gcm'                                 # same as gacm;
 alias gcm='git commit -m'                           # gcm git commit message;
 alias gce='git commit'                              # gcm git commit (editor);
 alias gacm='ga; gcm'                                # gacm git add commit message;
@@ -40,8 +46,10 @@ alias rdr='bundle exec rake db:reset'               # rr  rake db reset;
 alias rdm='bundle exec rake db:migrate'             # rr rake migrate; 
 alias rc='bundle exec rails console'                # rc  rails console;  
 alias rhc='heroku run rails console'                # rhc rails heroku console;    
-alias rs='bundle exec rails server  -p $PORT -b $IP'             # rs  rails server; 
-alias rpa='be rake assets:precompile RAILS_ENV=production' # rails precomile assets;
+alias rs='bundle exec rails server -p $PORT -b $IP' # rs  rails server; 
+alias rac='be rake assets:clean'                    # rails assets clean;
+alias rap='be rake assets:precompile RAILS_ENV=production;
+be rake assets:precompile RAILS_ENV=development' # rails assets precomile;
 alias rd='git push origin master; git push heroku master; heroku run rake db:migrate' # rails deploy;
 
 
@@ -52,8 +60,6 @@ alias rd='git push origin master; git push heroku master; heroku run rake db:mig
 alias nr='cd /; ls -a'                           # nr  navigate: root;  
 alias nh='cd ~/; ls -a'                          # nh  navigate: home;  
 alias nw='cd ~/workspace; ls -a'                 # nw  navigate: workspace;  
-alias nbr='cd ~/bashful_rails; ls -a'            # nbr navigate: bashful_rails; 
-alias ns='cd ~/bashful_rails/scripts; ls -a'     # ns navigate: bashful_rails/scripts/; 
 alias ngr='. ngr_src; ls -a'                     # ngr navigate: git root;
 
 # re is for rails edit (this only makes sense if you use c9.io);
@@ -71,3 +77,6 @@ alias rails.md='echo "https://private-jeff-russ.c9users.io/?aws=jeffruss/_rails"
 alias run.md='cd ~/workspace/LivePage-md; bundle exec rails server -p $PORT -b $IP;';
 
 alias ger='ngr; c9 README.md'       # git edit readme
+
+# Amazon AWS S3 
+alias s3buckets="aws s3api list-buckets --query 'Buckets[].Name'"

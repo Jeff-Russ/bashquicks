@@ -1,0 +1,8 @@
+#!/bin/bash
+# s3pull - pull bucket content to working directory 
+# Requires no arguments.  
+# Current directory name must match bucket name!
+
+source="s3://${PWD##*/}";
+echo "running $ aws s3 sync $source ."
+aws s3 sync $source .

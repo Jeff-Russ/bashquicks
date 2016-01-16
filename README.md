@@ -2,17 +2,53 @@
 
 ## About
 
-This is a collection of helpful bash aliases, scripts and fuctions.
-Keep in mind that I work mainly in/with the following:
+This is a collection of helpful bash aliases, scripts and fuctions.  
+Keep in mind that I work mainly in/with the following:  
 
 1. Ruby on Rails
 2. Git, Github, BitBucket
 3. Heroku
 4. Cloud9 IDE
 5. Cloud9's bash terminal
+6. **NEW!!** Amazon AWS S3
 
-and these scripts are geared toward that useage. 
+These scripts are geared toward that useage.  
 
+## New in  this commit
+
+*Useful commands for Amazon AWS S3*
+
+These require installation of [Amazon AWS CLI](https://aws.amazon.com/cli/)  
+
+1. `s3swd` **- Sync Working Directory**  
+    Sync files to Amazon AWS S3 bucket  
+    Current directory name must match bucket name!  
+        
+        $ s3swd    # sync without specifying permissions
+        $ s3swd r  # sync, public can read
+        $ s3swd w  # sync, public can read and write
+        $ s3swd p  # sync, private: no public access
+    
+2. `s3sad` **- Sync All Directories**
+    Same as s3swd only for all sub-directories, one by one  
+    Sub-directory names must match bucket names!  
+        
+        $ s3sad    # sync all without specifying permissions
+        $ s3sad r  # sync all, public can read
+        $ s3sad w  # sync all, public can read and write
+        $ s3sad p  # sync all, private: no public access
+    
+3. `s3pull` **- pull bucket content to working directory**  
+    Requires no arguments.  
+    Current directory name must match bucket name!  
+    
+        $ s3pull
+        
+4. `s3buckets` **- list all bucket names**  
+    This is just a simple alias of `aws s3api list-buckets --query 'Buckets[].Name'`  
+    
+       $ s3buckets
+    
 ## Installation 
 
 To install, place the file in your home directory. In Cloud9 you can't drop 
@@ -34,30 +70,38 @@ workspace with this:
 
 Keep in mind the limitations of soft links! http://linuxgazette.net/105/pitcher.html
 
-## Bash Aliases
+## A Few Bash Aliases
 
-If you are in Cloud9, run this to Print Bash Aliases:
+`n`avigate to the `b`ashful_`r`ails directory and show contents:
 
-    $ pba
+    $ nbr
+
+If you are in Cloud9, run this to display `b`ashful `r`ails `a`liases:
+
+    $ bra 
     
-Or run this in Cloud9 to edit them:
+Or run this in Cloud9 to edit them (`b`ashful `r`ails `e`dit `a`liases):
 
-    $ c9ba
+    $ brea
 
-If you make changes you can run this (defined in bash_aliases) command:
+If you make changes you can run this command to reload the .`b`ash_`rc` file.
 
     $ brc
     
 ## Bash Scripts
 
 The scripts are well commented so If you'd like to learn what they do I suggest 
-looking at them directly. First get a list of them:
+looking at them directly. This `n`avigates to the `b`ashful/`r`ails/`s`cripts 
+and lists the contents
 
-    $ nbs
+    $ nbrs
     
-You can Print Bash Scripts, all of them, using cat with this:
+`cat` any one of them to see the content. In cloud9 you can use this command to 
+make a `n`ew empty `s`cript and open it in the editor:
 
-    $ pbs
+    $ brns filename
+
+
     
 # TODO
 

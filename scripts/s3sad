@@ -1,0 +1,29 @@
+#!/bin/bash
+# s3sad - Sync All Directories
+# Same as s3swd only for all sub-directories, one by one  
+# Sub-directory names must match bucket names!  
+
+echo ''
+
+for dir in */; do 
+   cd $dir
+
+   destination="s3://${PWD##*/}";
+   
+   if [ -z "$1" ]; then
+      echo "running... $ aws s3 sync . $destination";
+      aws s3 sync . $destination;
+   elif [ $1 == "r" ]; then
+      echo "running... $ aws s3 sync . $destination --acl public-read";
+      aws s3 sync . $destination --acl public-read;
+   elif [ $1 == "w" ]; then
+      echo "running... $ aws s3 sync . $destination --acl public-read-write";
+      aws s3 sync . $destination --acl public-read-write;
+   elif [ $1 == "p" ]; then
+      echo "running... $ aws s3 sync . $destination --acl public-private";
+      aws s3 sync . $destination --acl public-read-write;
+   fi
+
+   cd ../
+   echo ""
+done

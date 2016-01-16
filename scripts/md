@@ -1,5 +1,0 @@
-#!/bin/bash
-
-    bundle exec rails server  -p $PORT -b $IP';
-    echo http://www.howto.jeffruss.com/?aws=jr.staging/
-
