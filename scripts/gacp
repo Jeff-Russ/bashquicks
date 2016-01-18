@@ -1,0 +1,24 @@
+#!/bin/bash
+# gacp git add commit push (with message)
+
+branch=`git rev-parse --abbrev-ref HEAD`
+echo "This will add all 'git add . -A', commit and push to $branch"
+
+
+
+while true; do
+   echo "Enter commit message in quotes or ctrl-c to cancel:"
+   read msg
+   echo "you entered $msg."
+   read -p "To push to $branch hit enter To enter a different message, enter 'n'" n
+   case $yn in
+      [Nn]* ) continue;;
+      * ) 
+         git add . -A; 
+         git status; 
+         git commit -m $msg; 
+         git push origin $branch;
+         break;;
+   esac
+done
+
