@@ -1,0 +1,13 @@
+#!/bin/bash
+# s3mb
+
+if (( $# == 0 )); then 
+   echo
+   echo "s3mb stands for Amazon 's3 make bucket'"
+   echo "useage: s3mb bucket-name"
+   echo
+else 
+   echo
+   aws s3 mb s3://$1
+   echo
+fi

@@ -12,7 +12,7 @@ SOURCE=$HOME'/bashful_rails/resources/bashrc_append'
 
 
 if grep -s $TOKEN $TARGET; then
-	echo "Installation found! Removing lines from ~/.bashrc...."
+	echo "Previous installation of bashful_rails found. Removing lines from ~/.bashrc...."
 	sed -i '/#bashful_rails_begin/','/#bashful_rails_end/d' $TARGET;
 else
 	cat $SOURCE >> $TARGET

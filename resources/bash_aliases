@@ -1,5 +1,6 @@
 # br is for bashful rails
-alias br_install='cd ~/bashful_rails; ./install.sh; cd -' # install bashful rails
+alias br_install='cd ~/bashful_rails; ./install.sh; cd -' # install bashful rails;
+alias br_uninstall='cd ~/bashful_rails; ./uninstall.sh; cd -' # uninstall bashful rail;s
 alias bra='cat ~/bashful_rails/resources/bash_aliases' # look at bash aliases;
 alias brea='c9 ~/bashful_rails/resources/bash_aliases' # br edit aliases;
 alias nbr='cd ~/bashful_rails; ls -a'          # nbr navigate: bashful_rails; 
@@ -10,11 +11,9 @@ alias brns='cd ~/bashful_rails/scripts; brns_src' # create a new empty script an
 alias brc='source ~/.bashrc'                          # bash rc: load ~/.bashrc;
 alias bex='chmod u+x'                                 # (make it) bash executable;
 
-# p is for print (using cat)
-alias pbr='cat ~/.bashrc'                              # look at bash resources;
-
 # c9 is for the Cloud9 Ace editor;
 alias gc9='git config --global core.editor "c9 --wait"' # git: c9 for commit messages
+alias c9brc='c9 ~/.bashrc'                              # edit bash resources;
 
 # g is for git;  
 alias gmv='git mv'                                  # gmv git mv;
@@ -31,6 +30,8 @@ alias gacm='ga; gcm'                                # gacm git add commit messag
 alias gace='ga; gce'                                # gace git add commit (editor);
 alias gracm='rpa; ga; gcm'                          # gracm git rails add commit message;
 alias grace='rpa; ga; gce'                          # grace git rails add commit (editor);
+alias gp='git push'                                 # gp git push;
+alias gph='git push heroku'                         # gph git push heroku;
 alias gpo='git push origin'                         # gpo git push origin;
 
 # r is for ruby or rails;  
@@ -79,4 +80,5 @@ alias run.md='cd ~/workspace/LivePage-md; bundle exec rails server -p $PORT -b $
 alias ger='ngr; c9 README.md'       # git edit readme
 
 # Amazon AWS S3 
-alias s3buckets="aws s3api list-buckets --query 'Buckets[].Name'"
+alias s3b="aws s3api list-buckets --query 'Buckets[].Name'"
+alias s3='aws s3';

@@ -44,10 +44,13 @@ These require installation of [Amazon AWS CLI](https://aws.amazon.com/cli/)
     
         $ s3pull
         
-4. `s3buckets` **- list all bucket names**  
+4. `s3b` **- list all bucket names**  
     This is just a simple alias of `aws s3api list-buckets --query 'Buckets[].Name'`  
     
-       $ s3buckets
+       $ s3b
+
+**NEW**
+added `s3mb` `s3rb` and `s3rbf` to make remove and remove with force buckets.
     
 ## Installation 
 

@@ -1,0 +1,18 @@
+#!/bin/bash
+# s3rb
+
+if (( $# == 0 )); then 
+  echo ""
+  echo "s3rb stands for Amazon 's3 remove bucket'"
+  echo "s3rb will remove a bucket but only if empty"
+  echo "useage: s3mb bucket-name"
+  echo ""
+else
+   echo
+   read -r -p "If bucket is not empty you must run s3rbf instead. Proceed? [Y/n]" response
+   response=${response,,} # tolower
+   echo
+   if [[ $response =~ ^(yes|y| ) ]]; then
+      aws s3 rb s3://$1
+   fi
+fi
