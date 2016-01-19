@@ -1,0 +1,141 @@
+#!/bin/bash
+# cmd.br
+
+ask() {
+   # http://djm.me/ask
+   while true; do
+      if [ "${2:-}" = "Y" ]; then
+         prompt="Y/n"
+         default=Y
+      elif [ "${2:-}" = "N" ]; then
+         prompt="y/N"
+         default=N
+      else
+         prompt="y/n"
+         default=
+      fi
+      # Ask the question - use /dev/tty in case stdin is redirected from somewhere else
+      read -p "$1 [$prompt] " REPLY </dev/tty
+      # Default?
+      if [ -z "$REPLY" ]; then
+         REPLY=$default
+      fi
+      # Check if the reply is valid
+      case "$REPLY" in
+         Y*|y*) return 0 ;;
+         N*|n*) return 1 ;;
+      esac
+   done
+}
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+unload="remove all BR scripts & aliases from ~/.bashrc"
+uninstall="remove all traces if bashful rails from system!"
+del="delete Bashful Rails script"
+rmx="remove execution priv's from"
+
+if (( $# == 0 )) || [ $1 = "help" ]; then
+   echo
+   echo "Commands for Bashful Rails"
+   echo "Usage:"
+   echo "$ cmd.br list      # list all Bashful Rails scripts"
+   echo "$ cmd.br path      # shows path of Bashful Rails scripts"
+   echo "$ cmd.br reload    # update ~/.bashrc with any new BR scripts & aliases"
+   echo "$ cmd.br unload    # $unload"
+   echo "$ cmd.br uninstall # $uninstall"
+   echo
+   echo "$ cmd.br new  [scriptname] [opt]   # open a new script in vi or [opt]"
+   echo "$ cmd.br edit [scriptname] [opt]   # edit a new script in vi or [opt]"
+   echo "$ cmd.br del  [scriptname]         # $del"
+   echo "$ cmd.br rmx  [optionalscriptname] # $rmx all or a specified script"
+   echo "$ cmd.br mkx  [optionalscriptname] # make executable: all or a specified script"
+   echo
+elif (( $# == 1 )); then
+   echo
+   if [ $1 == "list" ]; then ls $DIR
+   
+    elif [ $1 == "path" ]; then echo $DIR
+    
+    elif [ $1 == "reload" ]; then cd $DIR; cd ../; ./install.sh
+    
+    elif [ $1 == "unload" ]; then
+      if ask "CAUTION! This will $unload. ARE YOU SURE?"; then
+         cd $DIR; cd ../; ./unload.sh
+      fi
+      
+    elif [ $1 == "uninstall" ]; then cd $DIR; cd ../; ./uninstall.sh 
+
+    elif [ $1 == "rmx" ]; then
+      if ask "CAUTION! This will $rmx. ARE YOU SURE?"; then
+         echo "Running chmod a-x on all Bashful Rails scripts"; echo
+         cd $DIR
+         for i in * 
+         do
+             if test -f "$i" 
+             then
+               if [ $i != "cmd.br" ]; then
+                  chmod a-x $i;
+                  printf " $i "
+               fi
+             fi
+         done
+         echo; echo "done."; echo
+         echo "Run cmd.br mkx to make all scripts executable again."
+      fi
+      
+    elif [ $1 == "mkx" ]; then
+      echo "Making all Bashful Rails scripts executable with chmod u+x"; echo
+      cd $DIR
+      for i in * 
+      do
+          if test -f "$i" 
+          then
+            chmod u+x $i;
+            printf " $i "
+          fi
+      done
+      echo; echo "done."; echo
+      echo "Run cmd.br rmx to revoke execution privileges on all files."
+   fi
+elif (( $# == 2 )); then
+   echo
+   if [ $1 == "rmx" ]; then
+      cd $DIR
+      if [ ! -f $2 ]; then echo "No such file"; echo
+       else
+         if ask "CAUTION! This will $rmx $2 ARE YOU SURE?"; then
+            chmod a-x $2
+         fi
+      fi
+    elif [ $1 == "mkx" ]; then
+      cd $DIR
+      if [ ! -f $2 ]; then echo "No such file"; echo
+       else
+         chmod u+x $2;
+      fi
+    elif [ $1 == "new" ]; then
+      cd $DIR;
+      if [ ! -f $2 ]; then
+         touch $2;
+         echo "#!/bin/bash" >> $2;
+         chmod u+x $2;
+         vi $2;
+       else
+         ls
+         echo "File already exists! Run cmd.br edit $2 [optional editor] to edit it."
+         echo
+      fi
+    elif [ $1 == "edit" ]; then
+      cd $DIR
+      chmod u+x $2;
+      vi $2;
+    elif [ $1 == "del" ]; then
+      cd $DIR
+      if [ ! -f $2 ]; then echo "No such file"; echo
+       else
+         if ask "CAUTION! This will $del $2 ARE YOU SURE?"; then
+            rm $2
+         fi
+      fi
+   fi
+fi
