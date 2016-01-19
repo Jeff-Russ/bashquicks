@@ -1,6 +1,6 @@
 # br is for bashful rails
 alias br_install='cd ~/bashful_rails; ./install.sh; cd -' # install bashful rails;
-alias br_uninstall='cd ~/bashful_rails; ./uninstall.sh; cd -' # uninstall bashful rail;s
+alias br_uninstall='cd ~/bashful_rails; ./uninstall.sh; cd -' # uninstall bashful rail;
 alias bra='cat ~/bashful_rails/resources/bash_aliases' # look at bash aliases;
 alias brea='c9 ~/bashful_rails/resources/bash_aliases' # br edit aliases;
 alias nbr='cd ~/bashful_rails; ls -a'          # nbr navigate: bashful_rails; 

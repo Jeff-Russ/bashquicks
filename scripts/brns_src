@@ -1,8 +1,0 @@
-#!/bin/bash
-# bashful rails new script function used by brns alias
-
-touch $1;
-c9 $1;
-chmod u+x $1;
-echo "#!/bin/bash" >> $1;
-echo "" >> $1;

@@ -2,24 +2,46 @@
 # gacp git add commit push (with message)
 
 branch=`git rev-parse --abbrev-ref HEAD`
-   
+be="bundle exec"
+rdbmig="rake db:migrate"
+rdbrst="rake db:reset"
+rdbdrp="rake db:drop"
+rdbcre="rake db:create"
+rac="rake assets:clean"
+rac="rake assets:precompile"
+rprod="RAILS_ENV=production"
+rdev="RAILS_ENV=developement"
+rtest="RAILS_ENV=test"
+
 if (( $# == 0 )); then 
    echo "This will add all 'git add . -A', commit and push to $branch"
+   
    while true; do
       echo "Enter commit message in quotes or ctrl-c to cancel:"
       echo; read msg; echo
       echo "you entered $msg."
+      
+      echo -e " \t 1 to first run "
+      echo -e " \t 2 to first run "
+      echo -e " \t 3 to first run "
+      
       read -p "To push to $branch enter 'y' to enter a different message, enter 'n'" yn
       case $yn in
          [Yy]* ) 
+            echo;
+            
+            
+            
             git add . -A; 
-            git status; 
-            git commit -m "$msg"; 
-            git push origin $branch;
+            
+            
+            git status; git commit -m "$msg"; git push origin $branch;
             break;;
          [Nn]* ) continue;;
          * ) echo "Please answer yes or no.";;
       esac
+      
+      
    done
 else
    git add . -A; 

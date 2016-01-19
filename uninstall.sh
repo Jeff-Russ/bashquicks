@@ -1,16 +1,18 @@
 #!/bin/bash
-# uninstall.sh 
-
+# uninstall.sh  
+# removes everything
 
 TOKEN="#bashful_rails_begin"
-TARGET=$HOME'/.bashrc'
-SOURCE=$HOME'/bashful_rails/resources/bashrc_append'
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+TARGET="$HOME/.bashrc"
 
 
 if grep -s $TOKEN $TARGET; then
-	echo "Installation of bashful_rails found. Removing lines from ~/.bashrc...."
+	echo "Previous installation of bashful_rails found. Removing lines from ~/.bashrc...."
 	sed -i '/#bashful_rails_begin/','/#bashful_rails_end/d' $TARGET;
-	source ~/.bashrc
-else
-	echo "Installation of bashful_rails not found!"
+ else
+	echo "Previous installation of bashful_rails not found."
 fi
+
+echo "removing all files from system"
+rm -rf $DIR

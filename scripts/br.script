@@ -1,0 +1,107 @@
+#!/bin/bash
+# br.script
+
+echo
+
+ask() {
+   # http://djm.me/ask
+   while true; do
+      if [ "${2:-}" = "Y" ]; then
+         prompt="Y/n"
+         default=Y
+      elif [ "${2:-}" = "N" ]; then
+         prompt="y/N"
+         default=N
+      else
+         prompt="y/n"
+         default=
+      fi
+      # Ask the question - use /dev/tty in case stdin is redirected from somewhere else
+      read -p "$1 [$prompt] " REPLY </dev/tty
+      # Default?
+      if [ -z "$REPLY" ]; then
+         REPLY=$default
+      fi
+      # Check if the reply is valid
+      case "$REPLY" in
+         Y*|y*) return 0 ;;
+         N*|n*) return 1 ;;
+      esac
+   done
+}
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+unload="remove all BR scripts & aliases from ~/.bashrc"
+uninstall="remove all traces if bashful rails from system!"
+del="delete Bashful Rails script"
+rmx="remove execution priv's from"
+
+if (( $# == 0 )) || [ $1 = "help" ]; then
+   echo "Bashful Rails Shell Scripts"
+   echo "Usage:"
+   echo "$ br.script list      # list all Bashful Rails scripts"
+   echo "$ br.script path      # shows path of Bashful Rails scripts"
+   echo "$ br.script cd        # change directory to path of BR scripts"
+   echo "$ br.script reload    # update ~/.bashrc with any new BR scripts & aliases"
+   echo "$ br.script unload    # $unload"
+   echo "$ br.script uninstall # $uninstall"
+   echo "$ br.script new  [scriptname] [opt]   # open a new script in vi or [opt]"
+   echo "$ br.script edit [scriptname] [opt]   # edit a new script in vi or [opt]"
+   echo "$ br.script del  [scriptname]         # $del"
+   echo "$ br.script rmx  [optionalscriptname] # $rmx all or a specified script"
+   echo "$ br.script mkx  [optionalscriptname] # make executable: all or a specified script"
+elif (( $# == 1 )); then
+   if [ $1 == "list" ]; then ls $DIR
+   
+    elif [ $1 == "path" ]; then echo $DIR
+    
+    # elif [ $1 = "cd" ]; # this is actually an alias, not a shell script
+    
+    elif [ $1 == "reload" ]; then cd $DIR; cd ../; ./install.sh
+    
+    elif [ $1 == "unload" ]; then
+      if ask "This will $unload."; then
+         cd $DIR; cd ../; ./unload.sh
+      fi
+      
+    elif [ $1 == "uninstall" ]; then
+      if ask "This will $uninstall."; then
+         cd $DIR; cd ../; ./uninstall.sh 
+      fi
+      
+    elif [ $1 == "rmx" ]; then
+      # add sanity check and implement
+      ls
+      
+    elif [ $1 == "mkx" ]; then
+      # add sanity check and implement
+      ls
+      
+   fi
+elif (( $# == 2 )); then
+   if [ $1 == "rmx" ]; then
+      # implement
+      ls
+    elif [ $1 == "mkx" ]; then
+      # implement
+      ls
+    elif [ $1 == "new" ]; then
+      ls
+    elif [ $1 == "edit" ]; then
+      ls
+    elif [ $1 == "del" ]; then
+      ls
+   fi
+fi
+
+
+
+
+# cd $DIR;
+# touch $1;
+# echo "#!/bin/bash" >> $1;
+# echo "# $DIR/$1" >> $1
+# echo "" >> $1;
+# chmod u+x $1;
+# c9 $1;
+

@@ -1,13 +1,14 @@
 
 #bashful_rails_begin
+#insert
 
-# added automatically by ~/bashful_rails/install.sh
-if [ -f ~/bashful_rails/resources/bash_aliases ]; then
-    . ~/bashful_rails/resources/bash_aliases
+# added automatically by $BR_PATH/install.sh
+if [ -f $BR_PATH/resources/bash_aliases ]; then
+    . $BR_PATH/resources/bash_aliases
 fi
 
-# added automatically by ~/bashful_rails/install.sh
-PATH="~/bashful_rails/scripts:${PATH}"
+# added automatically by $BR_PATH/install.sh
+PATH="$BR_PATH/scripts:${PATH}"
 
 function mycd {
     if (( $# == 0 )); then

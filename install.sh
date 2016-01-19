@@ -7,17 +7,19 @@
 # adds all scripts and aliases to environment by appending the .bashrc file in ~/
 
 TOKEN="#bashful_rails_begin"
-TARGET=$HOME'/.bashrc'
-SOURCE=$HOME'/bashful_rails/resources/bashrc_append'
-
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+INSERT="\$BR_PATH='$DIR'"
+TARGET="$HOME/.bashrc"
+SOURCE="$DIR/resources/bashrc_append"
 
 if grep -s $TOKEN $TARGET; then
 	echo "Previous installation of bashful_rails found. Removing lines from ~/.bashrc...."
 	sed -i '/#bashful_rails_begin/','/#bashful_rails_end/d' $TARGET;
-else
-	cat $SOURCE >> $TARGET
-	echo `source ~/.bashrc`
-	echo "Installation complete!"
 fi
 
-source ~/.bashrc
+echo sed "s|#insert|${DIR}|" $SOURCE
+sed "s|#insert|${INSERT}|" $SOURCE >> $TARGET
+echo `source ~/.bashrc`
+echo "done."
+
+source ~/.bashrc # needed?
