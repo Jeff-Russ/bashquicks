@@ -2,7 +2,7 @@
 # git.br
 
 shopt -s nullglob dotglob     # To include hidden files. Needed?
-echo; echo "Welcome to Bashful Rails command line extension for git"
+echo; echo "Welcome to Bashful Rails command line extension for git"; echo
 
 if (( $# == 0 )); then 
    echo; echo "The first argument dictates what task you want to execute:"
@@ -26,46 +26,67 @@ elif (( $# > 0 )); then
       echo "error: no git project found"; echo
     else
       cd $DIR
-      printf "git project detected at: "
-      echo $DIR; echo
-   fi
-   #  END - find git project root and cd to it
-   
-###### git.br push -------------------------------------------------------######
-   if [ $1 == "save" ]; then
+      proj=${PWD##*/} 
       remote='origin'
       branch=`git rev-parse --abbrev-ref HEAD`
       msg=''
       input=''
+   fi
+   #  END - find git project root and cd to it
+   
+###### git.br save -------------------------------------------------------######
+   if [ $1 == "save" ]; then
+      
       if (( $# == 1 )); then 
          echo; echo "This will run:"
          printf "\t$ git status; git add . -A; git status # with prompt to continue!\n"
-         printf "\t$ git commit -m 'your 2nd arg'         # you'll have a chance to revise the message\n"
-         printf "\t$ git push [3th-arg] ${branch}          # if you don't arg 3, 'origin' will be used\n\n" 
-         echo "You do not need to be at the project's root directory for this command"
+         printf "\t$ git commit -m 'your 3nd arg'         # you'll have a chance to revise the message\n"
+         printf "\t$ git push [4th-arg] ${branch}          # if you don't arg 4, 'origin' will be used\n\n" 
+         echo "You do not need to be at the project's root directory for this command"; echo
       fi
-      if (( $# > 1 )); then 
-         echo "more args than 1"
-         $mgs=$2
+      if (( $# > 1 )); then msg="$2"
+         if (( $# > 2 )); then remote="$3";
+            if (( $# > 3 )); then branch="$4"; fi
+         fi
          while true; do
-            read msg; echo
-            echo "you entered $msg."
-            printf "hit enter to continue or enter a different message"
-            read input
-            if [[ -n $temp ]]; then $msg=$input
-             else break;
+            printf "\nroot:\t'${proj}'\nbranch:\t'${branch}'\nremote:\t'${remote}'\nmessage\t'${msg}'"
+            printf "\n\n [b] to change branch\t[n] to change to new branch\t[r] to change remote\t[m] to change message"
+            printf "\n\n [b?] to show branches\t[r?] to show remotes\t[nr] to add remote"
+            printf "\n\n [enter] for dry run\t[ctrl-c] abort\n\nyour selection: "
+            read selection
+            if [ $selection == "b" ]; then
+               printf "enter branch name: "
+               read temp 
+               if [ $temp != $branch ]; then
+                  branch=$temp
+                  git checkout $branch
+               fi
+             elif [ $selection == "n" ]; then
+               printf "enter new branch name: "
+               read temp
+               if [ $temp != $branch ]; then 
+                  branch=$temp
+                  git checkout -b $branch
+               fi
+             elif [ $selection == "r" ]; then
+               printf "enter a new remote: "; read remote
+             elif [ $selection == "m" ]; then
+               printf "enter message surrounded by quotes: "; read msg
+             elif [[ -z $selection ]]; then break;
+             else printf "huh?\n"
             fi
          done
-      fi
-      if (( $# > 2 )); then  $remote=$3; fi
-      echo; echo "running $ git status; git add . -A; git status ..."
-      git status; git add . -A; git status;
-      input=''
-      printf "hit enter push to continue or ctrl-c to abort"
-      read input
-      if [[ -n $temp ]]; then
-         git commit -m "$msg"; 
-         git push origin $branch;
+         
+         echo; echo "running $ git status; git add . -A --dry-run; git status ..."
+         git status; git add . -A; git status;
+         temp=''
+         printf "\n\n [enter] to push\t[ctrl-c] abort\n\nyour selection: "
+         read input
+         if [[ -n $temp ]]; then
+            git commit -m "$msg"; git push $remote $branch;
+          else
+            git commit -m "$msg"; git push $remote $branch;
+         fi
       fi
    fi
 ###### git.br c -------------------------------------------------------######
