@@ -14,7 +14,9 @@ rdev="RAILS_ENV=developement"
 rtest="RAILS_ENV=test"
 
 if (( $# == 0 )); then 
-   echo "This will add all 'git add . -A', commit and push to $branch"
+   echo; echo "This will add all 'git add . -A', commit and push to the branch $branch"
+   echo "You do not need to be at the project's root directory"
+   echo "git.br push can be called directly with an additional argument for the commit message in quotes."
    
    while true; do
       echo "Enter commit message in quotes or ctrl-c to cancel:"
@@ -30,17 +32,13 @@ if (( $# == 0 )); then
          [Yy]* ) 
             echo;
             
-            
-            
             git add . -A; 
-            
             
             git status; git commit -m "$msg"; git push origin $branch;
             break;;
          [Nn]* ) continue;;
          * ) echo "Please answer yes or no.";;
       esac
-      
       
    done
 else

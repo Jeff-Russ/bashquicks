@@ -8,7 +8,7 @@
 
 TOKEN="#bashful_rails_begin"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-INSERT="\$BR_PATH='$DIR'"
+INSERT="BR_PATH='$DIR'"
 TARGET="$HOME/.bashrc"
 SOURCE="$DIR/resources/bashrc_append"
 
