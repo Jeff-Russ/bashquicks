@@ -52,7 +52,7 @@ elif (( $# > 0 )); then
             printf "\nroot:\t'${proj}'\nbranch:\t'${branch}'\nremote:\t'${remote}'\nmessage\t'${msg}'"
             printf "\n\n [b] to change branch\t[n] to change to new branch\t[r] to change remote\t[m] to change message"
             printf "\n\n [b?] to show branches\t[r?] to show remotes\t[nr] to add remote"
-            printf "\n\n [enter] for dry run\t[ctrl-c] abort\n\nyour selection: "
+            printf "\n\n [enter] to add . -A\t[ctrl-c] abort\n\nyour selection: "
             read selection
             if [ $selection == "b" ]; then
                printf "enter branch name: "
@@ -77,7 +77,6 @@ elif (( $# > 0 )); then
             fi
          done
          
-         echo; echo "running $ git status; git add . -A --dry-run; git status ..."
          git status; git add . -A; git status;
          temp=''
          printf "\n\n [enter] to push\t[ctrl-c] abort\n\nyour selection: "
