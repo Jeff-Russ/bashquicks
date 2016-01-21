@@ -54,23 +54,23 @@ elif (( $# > 0 )); then
             printf "\n\n [b?] to show branches\t[r?] to show remotes\t[nr] to add remote"
             printf "\n\n [enter] to add . -A\t[ctrl-c] abort\n\nyour selection: "
             read selection
-            if [ $selection == "b" ]; then
+            if [ "$selection" == "b" ]; then
                printf "enter branch name: "
                read temp 
                if [ $temp != $branch ]; then
                   branch=$temp
                   git checkout $branch
                fi
-             elif [ $selection == "n" ]; then
+             elif [ "$selection" == "n" ]; then
                printf "enter new branch name: "
                read temp
                if [ $temp != $branch ]; then 
                   branch=$temp
                   git checkout -b $branch
                fi
-             elif [ $selection == "r" ]; then
+             elif [ "$selection" == "r" ]; then
                printf "enter a new remote: "; read remote
-             elif [ $selection == "m" ]; then
+             elif [ "$selection" == "m" ]; then
                printf "enter message surrounded by quotes: "; read msg
              elif [[ -z $selection ]]; then break;
              else printf "huh?\n"
