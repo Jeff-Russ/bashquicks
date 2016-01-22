@@ -1,0 +1,150 @@
+#!/bin/bash
+# s3sync - Sync it all
+source functions.br.sh
+
+bucket_files=(`find_abspaths "..s3bucket"`) # array of ..s3bucket files on hd
+BUCKETS_ONS3=`aws s3 ls`       # a messy string of bucket names w/last modified
+glob_i=1                       # a global index that spans two iterators
+
+# first iterator: organizing info from ..s3bucket files about downloaded buckets
+for i in "${!bucket_files[@]}"; do
+   bucket_info_cat="`cat ${bucket_files[i]}`" # readout of whole file
+   bucket_info_arr=($bucket_info_cat)         # convert to array
+   
+   BUCKET_DIRS_ARR[i]=`dirname "${bucket_files[i]}"` # home of ..s3bucket file
+   BUCKET_NAME_ARR[i]=${bucket_info_arr[0]}          # name of bucket from file
+   BUCKET_ARGS_ARR[i]="${bucket_info_arr[1]} ${bucket_info_arr[2]}" # permissions
+   datemodified=`stat -c %y  ${BUCKET_DIRS_ARR[i]}`       # last modified
+   BUCKET_LMHD_ARR[i]=`echo $datemodified | cut -c 3-16`  # shorten and save
+   
+   # if also found online:
+   if [[ $BUCKETS_ONS3 == *"${BUCKET_NAME_ARR[i]}"* ]]; then 
+      SEL_N_ARR[i]=$i      # selection number for user input
+      BUCKET_ONS3_ARR[i]=1 # 1 means "yes, it's online"
+   else 
+      SEL_N_ARR[i]=$i
+      BUCKET_LMS3_ARR[i]="not online!" # just a notice to fill empty space on chart
+      BUCKET_ONS3_ARR[i]=0 # 0 means "no, it's not online"
+   fi
+   
+   glob_i=$i # increment the global index number
+done 
+# END first iterator
+
+# convert array of buckets found on HD to one long string, we'll need it:
+for i in "${!BUCKET_NAME_ARR[@]}"; do
+   BUCKETS_ONHD="${BUCKETS_ONHD} ${BUCKET_NAME_ARR[i]} "
+done;
+
+# convert long string of buckets found on online to an array, we'll need it too:
+bucket_online_arr=($BUCKETS_ONS3); # format is [date, time, name] ... repeat
+
+# second iterator: organizing info from aws s3 cli about buckets online
+for i in "${!bucket_online_arr[@]}"; do
+   position=$((i%3)) # because format was [date, time, name] ... repeat
+
+   if [[ $position == 0 ]]; then 
+      datemodified=${bucket_online_arr[i]}            # get date
+      datemodified=`echo $datemodified | cut -c 3-11` # trim it
+    elif [[ $position == 1 ]]; then 
+      timemodified=${bucket_online_arr[i]}            # get time
+      timemodified=`echo $timemodified | cut -c 1-5`  # trim it
+      
+    elif [[ $position == 2 ]]; then                   # get names and save all
+      
+      # buckets that are also on hard drive will modify old global indexes
+      if [[ $BUCKETS_ONHD == *"${bucket_online_arr[i]}"* ]]; then
+         for id in "${!BUCKET_NAME_ARR[@]}"; do   # iterate old names again
+            if [[ "${BUCKET_NAME_ARR[id]}" == "${bucket_online_arr[i]}" ]]; then
+               BUCKET_LMS3_ARR[id]="${datemodified} ${timemodified}"
+            fi
+         done
+         
+       # buckets that were not found on HD will be new global indexes
+       else
+         glob_i=$((glob_i+1))      # increment global index
+         SEL_N_ARR[glob_i]=$glob_i # new selection number for user
+         BUCKET_LMS3_ARR[glob_i]="${datemodified} ${timemodified}" # concat
+         BUCKET_NAME_ARR[glob_i]=${bucket_online_arr[i]} # save bucket name
+         BUCKET_ARGS_ARR[glob_i]=" unknown "             # fill...
+         BUCKET_LMHD_ARR[glob_i]="-------------"         # unknown...
+         BUCKET_DIRS_ARR[glob_i]="not found locally"     # fields
+      fi
+   fi
+done
+
+# time to print all of this out to make a user interface:
+for i in "${!SEL_N_ARR[@]}"; do
+   if [[ $i == 0 ]]; then echo;
+      printf " /   BUCKET NAME            | sharing  | LAST MOD HD | LAST MOD \
+S3 | FOUND LOCALLY AT PATH  \\ \n/---------------------------|----------|-----\
+--------|-------------|-------------------------\\ \n"
+   fi
+   
+   # trim info to fit in all on screen:
+   orig_share="${BUCKET_ARGS_ARR[i]}"
+   sharing=`replace "${orig_share}" "--acl" ""`
+   sharing=`replace "${sharing}" "public" "pub"`
+   sharing=`replace "${sharing}" "bucket-owner" "own"`
+   sharing=`replace "${sharing}" "authenticated" "auth"`
+   sharing=`replace "${sharing}" "full-control" "full"`
+   sharing=`replace "${sharing}" "log-delivery" "log"`
+   sharing=`replace "${sharing}" "aws-exec" "exec"`
+   sharing=`replace "${sharing}" "read-write" "rw"`
+   sharing=`replace "${sharing}" "read" "r"`
+   sharing=`replace "${sharing}" "write" "w"`
+   #--------------------------------------
+   orig_lmhd="${BUCKET_LMHD_ARR[i]}"
+   lmodhd=`replace "${orig_lmhd}" "-" ""`
+   lmodhd=`replace "${lmodhd}" "-" ""`
+   lmodhd=`replace "${lmodhd}" ":" ""`
+   #--------------------------------------
+   orig_lms3="${BUCKET_LMS3_ARR[i]}"
+   lmods3=`replace "${orig_lms3}" "-" ""`
+   lmods3=`replace "${lmods3}" "-" ""`
+   lmods3=`replace "${lmods3}" ":" ""`
+   #--------------------------------------
+   orig_hd_path="${BUCKET_DIRS_ARR[i]}"
+   home=`echo $HOME`
+   home_abbr="~"
+   hd_path=`replace "${orig_hd_path}" "${home}" "${home_abbr}"`
+   
+   # the printout:
+   printf "%-3s %-22s %-10s %-13s %-13s %s\n" "| ${SEL_N_ARR[i]} " \
+   "${BUCKET_NAME_ARR[i]}" "|${sharing}" "| ${lmodhd}" "| ${lmods3}" "| ${hd_path}"
+done;
+
+
+# if [[ $buckets == *$PROJ* ]]; then
+#    bucket=$PROJ
+#  elif [-f ".s3bucket" ]; then
+#    bucket=`cat config.txt`
+# fi
+# if [[ -z $selection ]]; then
+#    s3opt=""
+#    echo "The AmazonS3 bucket '${bucket}' was detected. Do you want to sync to it?"
+#    printf "[r] for public-read   [w] for public-read-write   [p] for private   [0] for no option"
+#    echo "...or just hit enter to do nothing"
+#    read temp
+#    if [[ -n $s3opt ]]; then s3swd "$s3opt"; fi
+# fi 
+
+
+# destination="s3://${PWD##*/}";
+
+# if [ -z "$1" ]; then
+#    printf "\ns3swd - Sync Working Directory takes one arg.\n"
+#    printf "[r] for public-read   [w] for public-read-write   [p] for private   [0] for no option\n\n"
+# elif [ $1 == "r" ]; then
+#    echo "running... $ aws s3 sync . $destination --acl public-read";
+#    aws s3 sync . $destination --acl public-read;
+# elif [ $1 == "w" ]; then
+#    echo "running... $ aws s3 sync . $destination --acl public-read-write";
+#    aws s3 sync . $destination --acl public-read-write;
+# elif [ $1 == "p" ]; then
+#    echo "running... $ aws s3 sync . $destination --acl public-private";
+#    aws s3 sync . $destination --acl public-read-write;
+# elif [ $1 == "0" ]; then
+#    echo "running... $ aws s3 sync . $destination";
+#    aws s3 sync . $destination --acl public-read-write;
+# fi

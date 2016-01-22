@@ -14,36 +14,36 @@ rdev="RAILS_ENV=developement"
 rtest="RAILS_ENV=test"
 
 if (( $# == 0 )); then 
-   echo; echo "This will add all 'git add . -A', commit and push to the branch $branch"
-   echo "You do not need to be at the project's root directory"
-   echo "git.br push can be called directly with an additional argument for the commit message in quotes."
-   
-   while true; do
-      echo "Enter commit message in quotes or ctrl-c to cancel:"
-      echo; read msg; echo
-      echo "you entered $msg."
+      echo; echo "This will add all 'git add . -A', commit and push to the branch $branch"
+      echo "You do not need to be at the project's root directory"
+      echo "git.br push can be called directly with an additional argument for the commit message in quotes."
       
-      echo -e " \t 1 to first run "
-      echo -e " \t 2 to first run "
-      echo -e " \t 3 to first run "
-      
-      read -p "To push to $branch enter 'y' to enter a different message, enter 'n'" yn
-      case $yn in
-         [Yy]* ) 
-            echo;
-            
-            git add . -A; 
-            
-            git status; git commit -m "$msg"; git push origin $branch;
-            break;;
-         [Nn]* ) continue;;
-         * ) echo "Please answer yes or no.";;
-      esac
-      
-   done
-else
-   git add . -A; 
-   git status; 
-   git commit -m "$1"; 
-   git push origin $branch;
-fi
+      while true; do
+         echo "Enter commit message in quotes or ctrl-c to cancel:"
+         echo; read msg; echo
+         echo "you entered $msg."
+         
+         echo -e " \t 1 to first run "
+         echo -e " \t 2 to first run "
+         echo -e " \t 3 to first run "
+         
+         read -p "To push to $branch enter 'y' to enter a different message, enter 'n'" yn
+         case $yn in
+            [Yy]* ) 
+               echo;
+               
+               git add . -A; 
+               
+               git status; git commit -m "$msg"; git push origin $branch;
+               break;;
+            [Nn]* ) continue;;
+            * ) echo "Please answer yes or no.";;
+         esac
+         
+      done
+   else
+      git add . -A; 
+      git status; 
+      git commit -m "$1"; 
+      git push origin $branch;
+   fi
