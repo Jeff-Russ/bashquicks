@@ -1,1 +1,1 @@
-bashful_rails --acl public-read
+bashful_rails, --acl public-read
