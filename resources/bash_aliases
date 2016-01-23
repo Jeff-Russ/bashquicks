@@ -15,24 +15,49 @@ alias bex='chmod u+x'                                 # (make it) bash executabl
 alias gc9='git config --global core.editor "c9 --wait"' # git: c9 for commit messages
 alias c9brc='c9 ~/.bashrc'                              # edit bash resources;
 
+gb_var_src(){
+   b=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+   echo "Current branch name \"$b\" saved to \"\$b\""
+}
+
+gc_src() {
+   if [[ "$1" == "-b" ]]; then 
+      git checkout -b "$2"
+    else
+      git checkout $1;
+   fi
+   gb_var_src
+}
+
+
+allremotes_src(){
+   for branch in `git branch -a | grep remotes | grep -v HEAD | grep -v master `; do
+      git branch --track ${branch#remotes/origin/} $branch
+   done
+}
+
+alias test="test_src"
 # g is for git;  
 alias gmv='git mv'                                  # gmv git mv;
-alias gc='git checkout'                             # gc  git checkout;  
+alias gc='gc_src'                                   # gc  git checkout; 
 alias gs='git status'                               # gs  git status;  
 alias gu='git checkout --force; git status'         # gu  git undo
 alias gm='git merge'                                # gm  git merge;  
 alias gb='git branch'                               # gb  git branch;
-alias ga='git add . -A; git status'                 # ga  git add;  
-alias gac='ga; gcm'                                 # same as gacm;
+alias ga='git add . -A; git status'                 # ga  git add;
+alias gac='ga; git commit'                          # same as gacm;
 alias gcm='git commit -m'                           # gcm git commit message;
-alias gce='git commit'                              # gcm git commit (editor);
 alias gacm='ga; gcm'                                # gacm git add commit message;
-alias gace='ga; gce'                                # gace git add commit (editor);
-alias gracm='rpa; ga; gcm'                          # gracm git rails add commit message;
-alias grace='rpa; ga; gce'                          # grace git rails add commit (editor);
+alias gac='ga; git commit'                          # gace git add commit (editor);
 alias gp='git push'                                 # gp git push;
-alias gph='git push heroku'                         # gph git push heroku;
+alias gphm='git push heroku master'                 # gph git push heroku master;
 alias gpo='git push origin'                         # gpo git push origin;
+alias gpob='git push origin $b'                     # gpo git push origin;
+alias gmt="git merge --no-commit --no-ff"           # git merge test
+alias gmu="git merge --abort"                       # undo git merge test
+alias gb_var="gb_var_src"                           # saves branch name to $b 
+
+
 
 # r is for ruby or rails;  
 alias rbu='bundle update'                           # rbu rails: bundle update;  
@@ -56,7 +81,7 @@ alias rd='git push origin master; git push heroku master; heroku run rake db:mig
 
 #alias rd='rpa; gac "precompile asset for production. About to deploy"; gpo master;
 #    git push heroku master; heroku run rake db:migrate';  # rails deploy;
-           
+         
 # n is for navigate;  
 alias nr='cd /; ls -a'                           # nr  navigate: root;  
 alias nh='cd ~/; ls -a'                          # nh  navigate: home;  

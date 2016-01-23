@@ -94,21 +94,3 @@ elif (( $# > 0 )); then
    # fi
 fi
 
-
-# alias gmv='git mv'                                  # gmv git mv;
-# alias gc='git checkout'                             # gc  git checkout;  
-# alias gs='git status'                               # gs  git status;  
-# alias gu='git checkout --force; git status'         # gu  git undo
-# alias gm='git merge'                                # gm  git merge;  
-# alias gb='git branch'                               # gb  git branch;
-# alias ga='git add . -A; git status'                 # ga  git add;  
-# alias gac='ga; gcm'                                 # same as gacm;
-# alias gcm='git commit -m'                           # gcm git commit message;
-# alias gce='git commit'                              # gcm git commit (editor);
-# alias gacm='ga; gcm'                                # gacm git add commit message;
-# alias gace='ga; gce'                                # gace git add commit (editor);
-# alias gracm='rpa; ga; gcm'                          # gracm git rails add commit message;
-# alias grace='rpa; ga; gce'                          # grace git rails add commit (editor);
-# alias gp='git push'                                 # gp git push;
-# alias gph='git push heroku'                         # gph git push heroku;
-# alias gpo='git push origin'                         # gpo git push origin;
