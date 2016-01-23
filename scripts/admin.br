@@ -1,32 +1,7 @@
 #!/bin/bash
-# cmd.br
+# admin.br
 
-ask() {
-   # http://djm.me/ask
-   while true; do
-      if [ "${2:-}" = "Y" ]; then
-         prompt="Y/n"
-         default=Y
-      elif [ "${2:-}" = "N" ]; then
-         prompt="y/N"
-         default=N
-      else
-         prompt="y/n"
-         default=
-      fi
-      # Ask the question - use /dev/tty in case stdin is redirected from somewhere else
-      read -p "$1 [$prompt] " REPLY </dev/tty
-      # Default?
-      if [ -z "$REPLY" ]; then
-         REPLY=$default
-      fi
-      # Check if the reply is valid
-      case "$REPLY" in
-         Y*|y*) return 0 ;;
-         N*|n*) return 1 ;;
-      esac
-   done
-}
+source functions.br.sh
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 unload="remove all BR scripts & aliases from ~/.bashrc"
@@ -38,17 +13,17 @@ if (( $# == 0 )) || [ $1 = "help" ]; then
    echo
    echo "Commands for Bashful Rails"
    echo "Usage:"
-   echo "$ cmd.br list      # list all Bashful Rails scripts"
-   echo "$ cmd.br path      # shows path of Bashful Rails scripts"
-   echo "$ cmd.br reload    # update ~/.bashrc with any new BR scripts & aliases"
-   echo "$ cmd.br unload    # $unload"
-   echo "$ cmd.br uninstall # $uninstall"
+   echo "$ admin.br list      # list all Bashful Rails scripts"
+   echo "$ admin.br path      # shows path of Bashful Rails scripts"
+   echo "$ admin.br reload    # update ~/.bashrc with any new BR scripts & aliases"
+   echo "$ admin.br unload    # $unload"
+   echo "$ admin.br uninstall # $uninstall"
    echo
-   echo "$ cmd.br new  [scriptname] [opt]   # open a new script in vi or [opt]"
-   echo "$ cmd.br edit [scriptname] [opt]   # edit a new script in vi or [opt]"
-   echo "$ cmd.br del  [scriptname]         # $del"
-   echo "$ cmd.br rmx  [optionalscriptname] # $rmx all or a specified script"
-   echo "$ cmd.br mkx  [optionalscriptname] # make executable: all or a specified script"
+   echo "$ admin.br new  [scriptname] [opt]   # open a new script in vi or [opt]"
+   echo "$ admin.br edit [scriptname] [opt]   # edit a new script in vi or [opt]"
+   echo "$ admin.br del  [scriptname]         # $del"
+   echo "$ admin.br rmx  [optionalscriptname] # $rmx all or a specified script"
+   echo "$ admin.br mkx  [optionalscriptname] # make executable: all or a specified script"
    echo
 elif (( $# == 1 )); then
    echo
@@ -73,14 +48,14 @@ elif (( $# == 1 )); then
          do
              if test -f "$i" 
              then
-               if [ $i != "cmd.br" ]; then
+               if [ $i != "admin.br" ]; then
                   chmod a-x $i;
                   printf " $i "
                fi
              fi
          done
          echo; echo "done."; echo
-         echo "Run cmd.br mkx to make all scripts executable again."
+         echo "Run admin.br mkx to make all scripts executable again."
       fi
       
     elif [ $1 == "mkx" ]; then
@@ -95,7 +70,7 @@ elif (( $# == 1 )); then
           fi
       done
       echo; echo "done."; echo
-      echo "Run cmd.br rmx to revoke execution privileges on all files."
+      echo "Run admin.br rmx to revoke execution privileges on all files."
    fi
 elif (( $# == 2 )); then
    echo
@@ -122,7 +97,7 @@ elif (( $# == 2 )); then
          vi $2;
        else
          ls
-         echo "File already exists! Run cmd.br edit $2 [optional editor] to edit it."
+         echo "File already exists! Run admin.br edit $2 [optional editor] to edit it."
          echo
       fi
     elif [ $1 == "edit" ]; then

@@ -6,8 +6,8 @@
 destination="s3://${PWD##*/}";
 
 if [ -z "$1" ]; then
-   echo "running... $ aws s3 sync . $destination";
-   aws s3 sync . $destination;
+   printf "\ns3swd - Sync Working Directory takes one arg.\n"
+   printf "[r] for public-read   [w] for public-read-write   [p] for private   [0] for no option\n\n"
 elif [ $1 == "r" ]; then
    echo "running... $ aws s3 sync . $destination --acl public-read";
    aws s3 sync . $destination --acl public-read;
@@ -16,5 +16,8 @@ elif [ $1 == "w" ]; then
    aws s3 sync . $destination --acl public-read-write;
 elif [ $1 == "p" ]; then
    echo "running... $ aws s3 sync . $destination --acl public-private";
+   aws s3 sync . $destination --acl public-read-write;
+elif [ $1 == "0" ]; then
+   echo "running... $ aws s3 sync . $destination";
    aws s3 sync . $destination --acl public-read-write;
 fi

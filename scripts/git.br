@@ -1,96 +1,74 @@
 #!/bin/bash
-# git.br
+# save.br
+
 
 shopt -s nullglob dotglob     # To include hidden files. Needed?
 echo; echo "Welcome to Bashful Rails command line extension for git"; echo
 
-if (( $# == 0 )); then 
-   echo; echo "The first argument dictates what task you want to execute:"
-   echo "Run any of these without a second argument to get more information:"
+ORIG_DIR=${PWD}
 
-elif (( $# > 0 )); then 
+#  BEGIN - find git project root and cd to it:
+# This checks if the current working directory or anything above it contains .git/  
+GIT_DIR=${PWD}
+TARGET="$GIT_DIR/.git"
+until [ "$(ls -a $TARGET 2> /dev/null)" ] # 2> /dev/null suppresses errors
+ do
+   GIT_DIR=`dirname $GIT_DIR`
+   TARGET="$GIT_DIR/.git"
    
-   #  BEGIN - find git project root and cd to it:
-   DIR=${PWD}
-   TARGET="$DIR/.git"
-   # This checks if the current working directory contains .git/  
-   until [ "$(ls -a $TARGET 2> /dev/null)" ] # 2> /dev/null suppresses errors
-    do
-      DIR=`dirname $DIR` # .git not found. move up
-      TARGET="$DIR/.git" 
-      if [ $DIR = "/" ]; then 
-         break;
-      fi
-   done
-   if [ $DIR = "/" ]; then 
-      echo "error: no git project found"; echo
-    else
-      cd $DIR
-      proj=${PWD##*/} 
-      remote='origin'
-      branch=`git rev-parse --abbrev-ref HEAD`
-      msg=''
-      input=''
-   fi
-   #  END - find git project root and cd to it
-   
-###### git.br save -------------------------------------------------------######
-   if [ $1 == "save" ]; then
-      
-      if (( $# == 1 )); then 
-         echo; echo "This will run:"
-         printf "\t$ git status; git add . -A; git status # with prompt to continue!\n"
-         printf "\t$ git commit -m 'your 3nd arg'         # you'll have a chance to revise the message\n"
-         printf "\t$ git push [4th-arg] ${branch}          # if you don't arg 4, 'origin' will be used\n\n" 
-         echo "You do not need to be at the project's root directory for this command"; echo
-      fi
-      if (( $# > 1 )); then msg="$2"
-         if (( $# > 2 )); then remote="$3";
-            if (( $# > 3 )); then branch="$4"; fi
-         fi
-         while true; do
-            printf "\nroot:\t'${proj}'\nbranch:\t'${branch}'\nremote:\t'${remote}'\nmessage\t'${msg}'"
-            printf "\n\n [b] to change branch\t[n] to change to new branch\t[r] to change remote\t[m] to change message"
-            printf "\n\n [b?] to show branches\t[r?] to show remotes\t[nr] to add remote"
-            printf "\n\n [enter] to add . -A\t[ctrl-c] abort\n\nyour selection: "
-            read selection
-            if [ "$selection" == "b" ]; then
-               printf "enter branch name: "
-               read temp 
-               if [ $temp != $branch ]; then
-                  branch=$temp
-                  git checkout $branch
-               fi
-             elif [ "$selection" == "n" ]; then
-               printf "enter new branch name: "
-               read temp
-               if [ $temp != $branch ]; then 
-                  branch=$temp
-                  git checkout -b $branch
-               fi
-             elif [ "$selection" == "r" ]; then
-               printf "enter a new remote: "; read remote
-             elif [ "$selection" == "m" ]; then
-               printf "enter message surrounded by quotes: "; read msg
-             elif [[ -z $selection ]]; then break;
-             else printf "huh?\n"
-            fi
-         done
-         
-         git status; git add . -A; git status;
-         temp=''
-         printf "\n\n [enter] to push\t[ctrl-c] abort\n\nyour selection: "
-         read input
-         if [[ -n $temp ]]; then
-            git commit -m "$msg"; git push $remote $branch;
-          else
-            git commit -m "$msg"; git push $remote $branch;
-         fi
-      fi
-   fi
-###### git.br c -------------------------------------------------------######
-   # if [ $1 == "c" ]; then
-   # echo; 
-   # fi
+   if [ $GIT_DIR = "/" ]; then break; fi # we hit disk root: falure
+done
+if [ $GIT_DIR = "/" ]; then printf "\nNo git projectect found\n"; GIT=0
+ else
+   GIT=1
+   cd $GIT_DIR
+   PROJ=${PWD##*/} 
+   REMOTE='origin'
+   BRANCH=`git rev-parse --abbrev-ref HEAD`
+   MSG=''
+   input=''
 fi
+#  END - find git project root and cd to it
 
+
+if (( $# > 0 )); then MSG="$1"
+   if (( $# > 1 )); then REMOTE="$2";
+      if (( $# > 2 )); then BRANCH="$3"; fi
+   fi
+fi
+while true; do
+   printf "\nroot:\t'${PROJ}'\nBRANCH:\t'${BRANCH}'\nREMOTE:\t'${REMOTE}'\nMESSAGE\t'${MSG}'"
+   printf "\n\n [b] change BRANCH\t[n] use new BRANCH\t[r] change REMOTE\t[m] change MESSAGE"
+   printf "\n [b?] show BRANCHES\t[r?] show REMOTES\t[nr] add REMOTE"
+   printf "\n [enter] add . -A\t[ctrl-c] abort\n\nyour selection: "
+   read selection
+   if [ "$selection" == "b" ]; then
+      printf "enter BRANCH name: "
+      read temp 
+      if [ $temp != $BRANCH ]; then
+         BRANCH=$temp
+         git checkout $BRANCH
+      fi
+    elif [ "$selection" == "n" ]; then
+      printf "enter new BRANCH name: "
+      read temp
+      if [ $temp != $BRANCH ]; then 
+         BRANCH=$temp
+         git checkout -b $BRANCH
+      fi
+    elif [ "$selection" == "r" ]; then
+      printf "enter a new REMOTE: "; read REMOTE
+    elif [ "$selection" == "m" ]; then
+      printf "enter MESSAGE surrounded by quotes: "; read MSG
+    elif [[ -z $selection ]]; then break;
+    else printf "huh?\n"
+   fi
+done
+
+git status; git add . -A; git status;
+temp=''
+printf "\n\n [enter] push\t[ctrl-c] abort\n\nyour selection: "
+read input
+if [[ -n $temp ]]; then
+   git commit -m "$MSG"; git push $REMOTE $BRANCH;
+fi
