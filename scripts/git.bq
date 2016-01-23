@@ -1,9 +1,9 @@
 #!/bin/bash
-# save.br
+# save.bq
 
 
 shopt -s nullglob dotglob     # To include hidden files. Needed?
-echo; echo "Welcome to Bashful Rails command line extension for git"; echo
+echo; echo "Welcome to bashquicks command line extension for git"; echo
 
 ORIG_DIR=${PWD}
 

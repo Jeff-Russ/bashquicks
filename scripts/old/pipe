@@ -1,7 +1,0 @@
-#!/bin/bash
-
-root=`gitr`
-
-echo `"cd ~/"`
-# echo `$2`
-# echo `cd -`

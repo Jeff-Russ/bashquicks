@@ -1,4 +1,4 @@
-# Bashful Rails
+# bashquicks
 
 ## About
 
@@ -58,34 +58,34 @@ To install, place the file in your home directory. In Cloud9 you can't drop
 directly to the home directory so you would have to put it in ~/workspace and 
 then run:
 
-    $ mv ~/workspace/bashful_rails ~/bashful_rails; c9 ~/bashful_rails/README.md
+    $ mv ~/workspace/bashquicks ~/bashquicks; c9 ~/bashquicks/README.md
     
 now in terminal:
 
-    $ cd ~/bashful_rails; ./install.sh
+    $ cd ~/bashquicks; ./install.sh
     
 and you should be ready to go!
     
 If you are on Cloud9 you might want to make a soft link to the library on your 
 workspace with this:
 
-    $ ln -s ~/bashful_rails/ ~/workspace
+    $ ln -s ~/bashquicks/ ~/workspace
 
 Keep in mind the limitations of soft links! http://linuxgazette.net/105/pitcher.html
 
 ## A Few Bash Aliases
 
-`n`avigate to the `b`ashful_`r`ails directory and show contents:
+`n`avigate to the `b`ash`q`uicks directory and show contents:
 
-    $ nbr
+    $ nbq
 
-If you are in Cloud9, run this to display `b`ashful `r`ails `a`liases:
+If you are in Cloud9, run this to display `b`ash`q`uicks `a`liases:
 
-    $ bra 
+    $ bqa 
     
-Or run this in Cloud9 to edit them (`b`ashful `r`ails `e`dit `a`liases):
+Or run this in Cloud9 to edit them (`b`ash`q`uicks `e`dit `a`liases):
 
-    $ brea
+    $ bqea
 
 If you make changes you can run this command to reload the .`b`ash_`rc` file.
 
@@ -102,7 +102,7 @@ and lists the contents
 `cat` any one of them to see the content. In cloud9 you can use this command to 
 make a `n`ew empty `s`cript and open it in the editor:
 
-    $ brns filename
+    $ bqns filename
 
 
     

@@ -1,29 +1,29 @@
 #!/bin/bash
-# admin.br
+# admin.bq
 
-source functions.br.sh
+source functions.bq.sh
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-unload="remove all BR scripts & aliases from ~/.bashrc"
-uninstall="remove all traces if bashful rails from system!"
-del="delete Bashful Rails script"
+unload="remove all BQ scripts & aliases from ~/.bashrc"
+uninstall="remove all traces if bashquicks from system!"
+del="delete bashquicks script"
 rmx="remove execution priv's from"
 
 if (( $# == 0 )) || [ $1 = "help" ]; then
    echo
-   echo "Commands for Bashful Rails"
+   echo "Commands for bashquicks"
    echo "Usage:"
-   echo "$ admin.br list      # list all Bashful Rails scripts"
-   echo "$ admin.br path      # shows path of Bashful Rails scripts"
-   echo "$ admin.br reload    # update ~/.bashrc with any new BR scripts & aliases"
-   echo "$ admin.br unload    # $unload"
-   echo "$ admin.br uninstall # $uninstall"
+   echo "$ admin.bq list      # list all bashquicks scripts"
+   echo "$ admin.bq path      # shows path of bashquicks scripts"
+   echo "$ admin.bq reload    # update ~/.bashrc with any new BQ scripts & aliases"
+   echo "$ admin.bq unload    # $unload"
+   echo "$ admin.bq uninstall # $uninstall"
    echo
-   echo "$ admin.br new  [scriptname] [opt]   # open a new script in vi or [opt]"
-   echo "$ admin.br edit [scriptname] [opt]   # edit a new script in vi or [opt]"
-   echo "$ admin.br del  [scriptname]         # $del"
-   echo "$ admin.br rmx  [optionalscriptname] # $rmx all or a specified script"
-   echo "$ admin.br mkx  [optionalscriptname] # make executable: all or a specified script"
+   echo "$ admin.bq new  [scriptname] [opt]   # open a new script in vi or [opt]"
+   echo "$ admin.bq edit [scriptname] [opt]   # edit a new script in vi or [opt]"
+   echo "$ admin.bq del  [scriptname]         # $del"
+   echo "$ admin.bq rmx  [optionalscriptname] # $rmx all or a specified script"
+   echo "$ admin.bq mkx  [optionalscriptname] # make executable: all or a specified script"
    echo
 elif (( $# == 1 )); then
    echo
@@ -42,24 +42,24 @@ elif (( $# == 1 )); then
 
     elif [ $1 == "rmx" ]; then
       if ask "CAUTION! This will $rmx. ARE YOU SURE?"; then
-         echo "Running chmod a-x on all Bashful Rails scripts"; echo
+         echo "Running chmod a-x on all bashquicks scripts"; echo
          cd $DIR
          for i in * 
          do
              if test -f "$i" 
              then
-               if [ $i != "admin.br" ]; then
+               if [ $i != "admin.bq" ]; then
                   chmod a-x $i;
                   printf " $i "
                fi
              fi
          done
          echo; echo "done."; echo
-         echo "Run admin.br mkx to make all scripts executable again."
+         echo "Run admin.bq mkx to make all scripts executable again."
       fi
       
     elif [ $1 == "mkx" ]; then
-      echo "Making all Bashful Rails scripts executable with chmod u+x"; echo
+      echo "Making all bashquicks scripts executable with chmod u+x"; echo
       cd $DIR
       for i in * 
       do
@@ -70,7 +70,7 @@ elif (( $# == 1 )); then
           fi
       done
       echo; echo "done."; echo
-      echo "Run admin.br rmx to revoke execution privileges on all files."
+      echo "Run admin.bq rmx to revoke execution privileges on all files."
    fi
 elif (( $# == 2 )); then
    echo
@@ -97,7 +97,7 @@ elif (( $# == 2 )); then
          vi $2;
        else
          ls
-         echo "File already exists! Run admin.br edit $2 [optional editor] to edit it."
+         echo "File already exists! Run admin.bq edit $2 [optional editor] to edit it."
          echo
       fi
     elif [ $1 == "edit" ]; then

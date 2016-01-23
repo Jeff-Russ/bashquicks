@@ -4,7 +4,7 @@
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
 
-source functions.br.sh
+source functions.bq.sh
 
 help=" \
 Make bucket on HD   -> mbhd [name]    or on S3 -> mbs3 [name] or -> mbboth [name]\n \
@@ -32,7 +32,7 @@ fi
 
 cd ~
 printf "  _______________________________________________________________________________\n"
-printf " /    Bashful Rails S3 command-line extensions!    by Jeff Russ   ctrl-c to exit \\ \n"
+printf " /    bashquicks S3 command-line extensions!    by Jeff Russ   ctrl-c to exit \\ \n"
 printf " \_______________________________________________________________________________/\n"
 printf "\n\tAWS CLI found. Be sure you've run aws configure." 
 printf "\n\tGetting bucket names online, "

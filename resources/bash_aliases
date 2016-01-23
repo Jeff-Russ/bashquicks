@@ -1,11 +1,11 @@
-# br is for bashful rails
-alias br_install='cd ~/bashful_rails; ./install.sh; cd -' # install bashful rails;
-alias br_uninstall='cd ~/bashful_rails; ./uninstall.sh; cd -' # uninstall bashful rail;s
-alias bra='cat ~/bashful_rails/resources/bash_aliases' # look at bash aliases;
-alias brea='c9 ~/bashful_rails/resources/bash_aliases' # br edit aliases;
-alias cd.br='cd ~/bashful_rails; ls -a'          # nbr navigate: bashful_rails; 
-alias nbrs='cd ~/bashful_rails/scripts; ls -a' # ns navigate: bashful_rails/scripts/; 
-alias brns='cd ~/bashful_rails/scripts; brns_src' # create a new empty script and open in c9 
+# bq is for bashquicks
+alias bq_install='cd ~/bashquicks; ./install.sh; cd -' # install bashquicks;
+alias bq_uninstall='cd ~/bashquicks; ./uninstall.sh; cd -' # uninstall bashful rail;s
+alias bqa='cat ~/bashquicks/resources/bash_aliases' # look at bash aliases;
+alias bqea='c9 ~/bashquicks/resources/bash_aliases' # bq edit aliases;
+alias cd.bq='cd ~/bashquicks; ls -a'          # nbq navigate: bashquicks; 
+alias nbqs='cd ~/bashquicks/scripts; ls -a' # ns navigate: bashquicks/scripts/; 
+alias bqns='cd ~/bashquicks/scripts; bqns_src' # create a new empty script and open in c9 
 
 # b is for bash;
 alias brc='source ~/.bashrc'                          # bash rc: load ~/.bashrc;
