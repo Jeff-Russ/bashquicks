@@ -5,7 +5,7 @@
 #insert
 
 # Add all contents (recursively) of bashquicks/ to PATH:
-PATH=$PATH$( find $BQ_PATH/ -type d -printf ":%p" )
+# PATH=$PATH$( find $BQ_PATH/ -type d -printf ":%p" )
 
 # Array of all files exactly named "bash_aliases" anywhere in bashquicks/ path:
 BR_ALIAS_FILES=($(find $BQ_PATH -type f -name "bash_aliases"))

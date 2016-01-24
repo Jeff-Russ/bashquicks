@@ -25,6 +25,6 @@ fi
 echo sed "s|#insert|${DIR}|" $SOURCE
 sed "s|#insert|${INSERT}|" $SOURCE >> $TARGET
 echo `source ~/.bashrc`
-echo "done. you may need to run souce ~/.bashrc"
+echo "done. you may need to run source ~/.bashrc"
 
 source ~/.bashrc # needed?
