@@ -4,6 +4,8 @@
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
 
+echo "  adding git aliases from bashquicks"
+
 gb_var_src(){
    b=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
    echo "Current branch name \"$b\" saved to \"\$b\""

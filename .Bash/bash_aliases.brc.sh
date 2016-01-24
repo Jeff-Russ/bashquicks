@@ -4,6 +4,8 @@
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
 
+echo "  adding bash aliases from bashquicks"
+
 # b is for bash;
 alias brc='source ~/.bashrc'     # bash rc: load ~/.bashrc;
 alias bex='chmod u+x'            # (make it) bash executable;

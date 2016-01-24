@@ -4,6 +4,8 @@
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
 
+echo "  adding rails aliases from bashquicks"
+
 # r is for ruby or rails;  
 alias rbu='bundle update'                           # rbu rails: bundle update;  
 alias rbi='bundle install'                          # rbi rails: bundle install;  

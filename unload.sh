@@ -11,7 +11,8 @@ TOKEN="#bashquicks_begin"
 TARGET=$HOME'/.bashrc'
 unload="remove all BQ scripts & aliases from ~/.bashrc"
 
-if ask "CAUTION! This will $unload. ARE YOU SURE?"; then
+printf "\n  CAUTION! This will $unload.\n"
+if ask "  ARE YOU SURE?  "; then
 
 	if grep -s $TOKEN $TARGET; then
 		echo "Installation of bashquicks found. Removing lines from ~/.bashrc...."

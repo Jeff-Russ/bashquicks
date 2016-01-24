@@ -12,8 +12,9 @@ TOKEN="#bashquicks_begin"
 TARGET="$HOME/.bashrc"
 uninstall="remove all traces if bashful rails from system!"
 
-echo
-if ask "CAUTION! This will $uninstall. ARE YOU SURE?"; then
+
+printf "\n  !!!!!! CAUTION! This will $uninstall.\n"
+if ask "  ARE YOU SURE?  "; then
 
 	if grep -s $TOKEN $TARGET; then
 		echo "Previous installation of bashful_rails found. Removing lines from ~/.bashrc...."

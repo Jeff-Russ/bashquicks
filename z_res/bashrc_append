@@ -1,0 +1,38 @@
+
+#bashquicks_begin
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
+
+# $BQ_PATH value inserted upon installation by pwd the bashquicks/ directory:
+BQ_PATH='/home/ubuntu/workspace/bashquicks'
+
+# Add all directories (-maxdepth 3) found in bashquicks/ to $PATH:
+BQ_SUBDIRS=($(find $BQ_PATH -maxdepth 3 -mindepth 1 -type d -not -path '*/\.*'))
+
+for bq_subdir in "${BQ_SUBDIRS[@]}"; do 
+
+    printf "\n  Add \$PATH: bashquicks${bq_subdir##*bashquicks}/   "
+    PATH=$PATH:$bq_subdir;
+    
+    bq_subdir_files=($(find $bq_subdir -type f ! -path "*/.[!.]*"))
+    printf "chmod 777:  "
+    
+    for file in "${bq_subdir_files[@]}"; do 
+    
+        printf "${file##*/} "
+        chmod 777  "$file"
+    done
+done
+printf "\ndone\n"
+
+# bq_subdir_files=($(find $bq_subdir ! -path "*/.[!.]*"))
+
+# Array of all files exactly named "bash_aliases" anywhere in bashquicks/ path:
+# BQ_ALIAS_FILES=($(find $BQ_PATH -name "bash_aliases" ! -path "*/.[!.]*"))
+BRC_SH_PATHS=($(find $BQ_PATH -name "*brc.sh" ! -path "*/.[!.]*"))
+printf "running bashrc associated scripts:\n"
+for brc_sh_path in "${BRC_SH_PATHS[@]}"; do  . $brc_sh_path; done
+
+printf "\n\nbashquick installation complete\n\n"
+#bashquicks_end

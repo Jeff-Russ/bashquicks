@@ -4,6 +4,8 @@
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
 
+echo "  adding c9 aliases from bashquicks"
+
 # bq is for bashquicks NEED TO BE REDONE:
 # alias bqea='c9 ~/bashquicks/resources/bash_aliases' # bq edit aliases;
 # alias bqns='cd ~/bashquicks/scripts; bqns_src' # create a new empty script and open in c9 

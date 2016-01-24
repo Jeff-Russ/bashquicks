@@ -4,20 +4,12 @@
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
 
+echo "  adding bq aliases from bashquicks"
+
 # bq is for bashquicks
 alias bq_install='cd ~/bashquicks; ./install.sh; cd -' # install bashquicks;
 alias bq_uninstall='cd ~/bashquicks; ./uninstall.sh; cd -' # uninstall bashful rail;s
 alias bqa='cat ~/bashquicks/resources/bash_aliases' # look at bash aliases;
 alias cd.bq='cd ~/bashquicks; ls -a'          # nbq navigate: bashquicks; 
 alias nbqs='cd ~/bashquicks/scripts; ls -a' # ns navigate: bashquicks/scripts/; 
-
-# b is for bash;
-alias brc='source ~/.bashrc'                          # bash rc: load ~/.bashrc;
-alias bex='chmod u+x'                                 # (make it) bash executable;
-
-# n is for navigate;  
-alias nr='cd /; ls -a'                           # nr  navigate: root;  
-alias nh='cd ~/; ls -a'                          # nh  navigate: home;  
-alias nw='cd ~/workspace; ls -a'                 # nw  navigate: workspace;  
-alias ngr='. ngr_src; ls -a'                     # ngr navigate: git root;
 
