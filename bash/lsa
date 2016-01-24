@@ -1,0 +1,13 @@
+#!/bin/bash
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
+# list contents of each directory one by one
+
+for dir in */; do 
+   cd $dir
+   echo "${PWD##*/}/ contains:"
+   ls
+   cd ../
+   echo ""
+done

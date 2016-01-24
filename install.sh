@@ -1,20 +1,25 @@
 #!/bin/bash
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
 # install.sh 
 
-# TODO touch ~/.bash_prompt; ~/.bash_prompt < cat ~/bashful_rails/resources/bashrc_prompt 
+# TODO touch ~/.bash_prompt; ~/.bash_prompt < cat ~/bashquicks/resources/bashrc_prompt 
 # or something like that
 
 # adds all scripts and aliases to environment by appending the .bashrc file in ~/
 
-TOKEN="#bashful_rails_begin"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$DIR/shared/bq_funcs.sh"
+
+TOKEN="#bashquicks_begin"
 INSERT="BR_PATH='$DIR'"
 TARGET="$HOME/.bashrc"
-SOURCE="$DIR/resources/bashrc_append"
+SOURCE="$DIR/bq/bashrc_append"
 
 if grep -s $TOKEN $TARGET; then
-	echo "Previous installation of bashful_rails found. Removing lines from ~/.bashrc...."
-	sed -i '/#bashful_rails_begin/','/#bashful_rails_end/d' $TARGET;
+	echo "Previous installation of bashquicks found. Removing lines from ~/.bashrc...."
+	sed -i '/#bashquicks_begin/','/#bashquicks_end/d' $TARGET;
 fi
 
 echo sed "s|#insert|${DIR}|" $SOURCE

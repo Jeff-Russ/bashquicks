@@ -1,4 +1,7 @@
 #!/bin/bash
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
 # s3swd - Sync Working Directory  
 # Sync files to Amazon AWS S3 bucket  
 # Current directory name must match bucket name!  

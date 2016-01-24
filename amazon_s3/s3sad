@@ -1,4 +1,7 @@
 #!/bin/bash
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
 # s3sad - Sync All Directories
 # Same as s3swd only for all sub-directories, one by one  
 # Sub-directory names must match bucket names!  

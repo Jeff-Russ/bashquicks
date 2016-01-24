@@ -1,4 +1,7 @@
 #!/bin/bash
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
 # ngr - navigate to git root 
 # useage: . ngr
 # NOTE THE DOT!!

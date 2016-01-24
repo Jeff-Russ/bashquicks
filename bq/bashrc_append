@@ -1,0 +1,26 @@
+
+#bashquicks_begin
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
+
+# $BQ_PATH value inserted upon installation by pwd the bashquicks/ directory:
+#insert
+
+# Add all contents (recursively) of bashquicks/ to PATH:
+PATH=$PATH$( find $BQ_PATH/ -type d -printf ":%p" )
+
+# Array of all files exactly named "bash_aliases" anywhere in bashquicks/ path:
+BR_ALIAS_FILES=($(find $BQ_PATH -type f -name "bash_aliases"))
+# Source all files in the array:
+for bash_aliases_path in "${BR_ALIAS_FILES[@]}"; do . $bash_aliases_path; done
+
+# see http://stackoverflow.com/questions/32794452/cloud-9-sdk-c9-
+# editor-doesnt-open-from-terminal-as-default-editor/32796457#32796457
+# export EDITOR='fn() { 
+#     cat $1 > ~/.c9-edit; 
+#     c9 open --wait ~/.c9-edit;
+#     cat ~/.c9-edit > $1;
+# } ;fn'
+
+#bashquicks_end

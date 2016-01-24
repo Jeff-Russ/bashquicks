@@ -1,5 +1,5 @@
 #!/bin/bash
-# functions.br.sh
+# bq_funcs.sh
 
 ask() {
    # http://djm.me/ask

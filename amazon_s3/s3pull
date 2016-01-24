@@ -1,4 +1,7 @@
 #!/bin/bash
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
 # s3pull - pull bucket content to working directory 
 # Requires no arguments.  
 # Current directory name must match bucket name!

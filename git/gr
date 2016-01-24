@@ -1,4 +1,7 @@
 #!/bin/bash
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
 # gr - execute at git root
 
 shopt -s nullglob dotglob     # To include hidden files. Needed?

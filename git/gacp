@@ -1,4 +1,7 @@
 #!/bin/bash
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
 # gacp git add commit push (with message)
 
 branch=`git rev-parse --abbrev-ref HEAD`

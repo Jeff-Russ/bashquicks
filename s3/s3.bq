@@ -1,0 +1,213 @@
+#!/bin/bash
+
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$DIR/../shared/bq_funcs.sh"
+
+help=" \
+Make bucket on HD   -> mbhd [name]    or on S3 -> mbs3 [name] or -> mbboth [name]\n \
+Backup on-HD bucket -> bkhd [ID#] on-S3 bucket -> bks3 [ID#]  or -> bkboth [ID#] \n \
+Remove on-HD bucket -> rmhd [ID#] on-S3 bucket -> rms3 [ID#]  or -> rmboth [ID#] \n \
+Update HD from S3   -> uphd [ID#] the other way-> ups3 [ID#]  or -> upboth [ID#]\n\n \
+For backup and update you can use 'all' instead of the ID# \n \
+For remove and update you have an optional 3rd arg 'N' to suppress auto-backup\n\n"
+
+cont=`which aws`
+if [[ -z $cont ]]; then 
+   printf "aws CLI not found. try running:\n"
+   cont=`which pip`
+   if [[ -z $cont ]]; then 
+      cont=`which python`
+      if [[ -z $cont ]]; then 
+         printf "\t$ sudo apt-get install python2.7\n"
+      fi
+      printf "\t$ curl -O https://bootstrap.pypa.io/get-pip.py\n"
+      printf "\t$ sudo python27 get-pip.py\n"
+   fi
+   printf "\t$ sudo pip install awscli\n"
+   exit 126
+fi
+
+cd ~
+printf "  _______________________________________________________________________________\n"
+printf " /    bashquicks S3 command-line extensions!    by Jeff Russ   ctrl-c to exit \\ \n"
+printf " \_______________________________________________________________________________/\n"
+printf "\n\tAWS CLI found. Be sure you've run aws configure." 
+printf "\n\tGetting bucket names online, "
+BUCKETS_ONS3=`aws s3 ls`       # a messy string of bucket names w/last modified
+printf "\tLooking for bucket tracking files on HD, \n"
+bucket_files=(`find_abspaths "..s3bucket"`) # array of ..s3bucket files on hd
+glob_i=1                       # a global index that spans two iterators
+
+################################################################################
+printf "\tSorting info from bucket tracking files on HD." # sort ..s3bucket info
+for i in "${!bucket_files[@]}"; do
+   printf "."
+   bucket_info_cat="`cat ${bucket_files[i]}`"   # readout of whole file
+   IFS=$','; bucket_info_arr=($bucket_info_cat); unset IFS  # convert to array
+   
+   BUCKET_DIRS_ARR[i]=`dirname "${bucket_files[i]}"` # home of ..s3bucket file
+   BUCKET_NAME_ARR[i]=${bucket_info_arr[0]}          # name of bucket from file
+   BUCKET_ARGS_ARR[i]="${bucket_info_arr[1]}" # ${bucket_info_arr[2]}" # permissions
+   BUCKET_LMHD_ARR[i]=`stat -c %z  ${BUCKET_DIRS_ARR[i]}`       # last modified
+   BUCKET_LMHD_ARR[i]=`chronostamp "${BUCKET_LMHD_ARR[i]}"`
+
+   # if also found online:
+   if [[ $BUCKETS_ONS3 == *"${BUCKET_NAME_ARR[i]}"* ]]; then 
+      SEL_N_ARR[i]=$i      # selection number for user input
+      BUCKET_LOCATIONS[i]=1 # 1 means  it's online and found locally"
+   else 
+      SEL_N_ARR[i]=$i
+      BUCKET_LMS3_ARR[i]="--NOT ONS3!!" # will display as "NOT ON S3!!"
+      BUCKET_LOCATIONS[i]=0 # 0 means its found locally and tracked but not online"
+   fi
+   glob_i=$i # increment the global index number
+done 
+################################################################################
+# convert array of buckets found on HD to one long string, we'll need it:
+for i in "${!BUCKET_NAME_ARR[@]}"; do
+   BUCKETS_ONHD="${BUCKETS_ONHD} ${BUCKET_NAME_ARR[i]} "
+done;
+# convert long string of buckets found on online to an array, we'll need it too:
+bucket_online_arr=($BUCKETS_ONS3); # format is [date, time, name] ... repeat
+################################################################################
+printf "\n\tCorrelating with bucket info from Amazon"
+for i in "${!bucket_online_arr[@]}"; do
+   printf "."
+   position=$((i%3)) # because format was [date, time, name] ... repeat
+
+   if [[ $position == 0 ]]; then datemodified=${bucket_online_arr[i]}    # get date
+    elif [[ $position == 1 ]]; then timemodified=${bucket_online_arr[i]} # get time
+    # get names and save all:
+    elif [[ $position == 2 ]]; then 
+      # buckets that are also on hard drive will modify old global indexes
+      if [[ $BUCKETS_ONHD == *"${bucket_online_arr[i]}"* ]]; then
+         for id in "${!BUCKET_NAME_ARR[@]}"; do   # iterate old names again
+            if [[ "${BUCKET_NAME_ARR[id]}" == "${bucket_online_arr[i]}" ]]; then
+               BUCKET_LMS3_ARR[id]="${datemodified}${timemodified}"
+               BUCKET_LMS3_ARR[id]=`chronostamp "${BUCKET_LMS3_ARR[id]}"`
+            fi
+         done
+       # buckets that were not found on HD will be new global indexes
+       else
+         glob_i=$((glob_i+1))      # increment global index
+         SEL_N_ARR[glob_i]=$glob_i # new selection number for user
+         BUCKET_LOCATIONS[glob_i]=-1 # -1 means online but no local trackers
+         BUCKET_LMS3_ARR[glob_i]="${datemodified}${timemodified}" # concat
+         BUCKET_LMS3_ARR[glob_i]=`chronostamp "${BUCKET_LMS3_ARR[glob_i]}"`
+         BUCKET_NAME_ARR[glob_i]=${bucket_online_arr[i]} # save bucket name
+      fi
+   fi
+done
+################################################################################
+printf "\n\tSearching for any untracked buckets on HD"
+for i in "${!BUCKET_LOCATIONS[@]}"; do
+   printf "."
+   if [[ "${BUCKET_LOCATIONS[i]}" == -1 ]]; then 
+      untracked[i]=`find_abspaths "${BUCKET_NAME_ARR[i]}"`
+      if [ -z "${untracked[i]}" ]; then
+         BUCKET_DIRS_ARR[i]="--- not found locally ---" # fields
+       else
+         BUCKET_DIRS_ARR[i]="--- CANDIDATE: ${untracked[i]}" # fields
+         BUCKET_LMHD_ARR[i]=`stat -c %z  ${untracked[i]}` # last modified
+         BUCKET_LMHD_ARR[i]=`chronostamp "${BUCKET_LMHD_ARR[i]}"`
+      fi
+   fi
+done
+################################################################################
+for i in "${!SEL_N_ARR[@]}"; do
+   temp="$i,${BUCKET_NAME_ARR[$i]},${BUCKET_LOCATIONS[$i]},${BUCKET_LMS3_ARR[$i]},\
+${BUCKET_LMHD_ARR[$i]},${BUCKET_ARGS_ARR[$i]},${BUCKET_DIRS_ARR[$i]},"
+   alls3data[$i]="$temp"
+   printf "\n $temp"
+done
+bucketdata=$(find `pwd` -name 'alls3data.txt' ! -path "*/.[!.]*");
+printf "%s\n" "${alls3data[@]}" > "$bucketdata"
+
+################################################################################
+printf "\n\tDone gathering info, now displaying... \n"
+# time to print all of this out to make a user interface:
+for i in "${!SEL_N_ARR[@]}"; do
+   if [[ $i == 0 ]]; then echo;
+      printf "      BUCKET NAME           | sharing  | LAST MOD HD | LAST MOD \
+S3 | FOUND LOCALLY AT PATH  \\ \n ID# -----------------------|----------|-----\
+--------|-------------|-------------------------\\ \n"
+   fi
+   sharing=`s3acl_readable "${BUCKET_ARGS_ARR[i]}"`; 
+   lmodhd=`chronostamp_readable "${BUCKET_LMHD_ARR[i]}"`
+   lmods3=`chronostamp_readable "${BUCKET_LMS3_ARR[i]}"`
+   hd_path=`homepath_abbrev "${BUCKET_DIRS_ARR[i]}"`
+   # the printout:
+   printf "%-3s %-22s %-10s %-13s %-13s %s\n" "| ${SEL_N_ARR[i]} " \
+   "${BUCKET_NAME_ARR[i]}" "| ${sharing}" "| ${lmodhd}" "| ${lmods3}" "| ${hd_path}"
+done
+for i in {1..80}; do printf "_"; done
+echo
+################################################################################
+
+up="uphd ups3 upboth"; mb="mbhd mbs3 mbboth"; rm="rmhd rms3 rmboth"
+bk="bkhd bks3 bkboth"; all="$up $mb $rm $bk"
+prompt="COMMANDS: $up - $mb - $rm - $bk\nctrl-c to exit. Confused? hit enter\n"
+
+if (( $# == 0 )); then
+   printf "$prompt" 
+   read sel; arg_arr=($sel); arg_len=${#arg_arr[@]}
+elif (( $# < 2 )); then
+   arg_len="$#"
+   arg_arr=("$@")
+   while true; do
+      if (( $arg_len == 1 )) && [[ $all == *"${arg_arr[0]}"* ]]; then
+         printf "Not enough args! Try again:\t"
+         read sel; arg_arr=($sel); arg_len=${#arg_arr[@]}
+       elif [[ $all != *"${arg_arr[0]}"* ]]; then 
+         printf "Invalid entry! Try again:\t"
+         read sel; arg_arr=($sel); arg_len=${#arg_arr[@]}
+       elif (( $arg_len == 0 )); then printf "$help"; printf "Your Selection:\t"
+         read sel; arg_arr=($sel); arg_len=${#arg_arr[@]}
+       else break
+      fi
+   done
+fi
+
+# if (( $arg_len > 0 )); then 
+#    if (( $arg_len > 1 )); then
+#       if (( $arg_len > 2 )); then
+#          if (( $arg_len > 3 )); then 
+#             printf "args > 3, "
+#          fi
+#          printf "args > 2, "
+#       fi
+#       printf "args > 1, "
+#    fi
+#    printf "args > 0, "
+#  else
+#    printf "$help" 
+# fi
+
+# echo
+# if [[ "$up" == *"$selection"* ]]; then 
+# if [[ "$up" == *"$selection"* ]]; then 
+#    printf " UPDATE"
+#  elif [[ -z $selection ]]; then 
+#    printf "$help" 
+# fi
+
+
+
+# if [[ $buckets == *$PROJ* ]]; then
+#    bucket=$PROJ
+#  elif [-f ".s3bucket" ]; then
+#    bucket=`cat config.txt`
+# fi
+# if [[ -z $selection ]]; then
+#    s3opt=""
+#    echo "The AmazonS3 bucket '${bucket}' was detected. Do you want to sync to it?"
+#    printf "[r] for public-read   [w] for public-read-write   [p] for private   [0] for no option"
+#    echo "...or just hit enter to do nothing"
+#    read temp
+#    if [[ -n $s3opt ]]; then s3swd "$s3opt"; fi
+# fi 
+

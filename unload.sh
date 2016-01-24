@@ -1,20 +1,26 @@
 #!/bin/bash
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
 # unload.sh 
 
-TOKEN="#bashful_rails_begin"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$DIR/shared/bq_funcs.sh"
+
+TOKEN="#bashquicks_begin"
 TARGET=$HOME'/.bashrc'
-unload="remove all BR scripts & aliases from ~/.bashrc"
+unload="remove all BQ scripts & aliases from ~/.bashrc"
 
 if ask "CAUTION! This will $unload. ARE YOU SURE?"; then
 
 	if grep -s $TOKEN $TARGET; then
-		echo "Installation of bashful_rails found. Removing lines from ~/.bashrc...."
-		sed -i '/#bashful_rails_begin/','/#bashful_rails_end/d' $TARGET;
+		echo "Installation of bashquicks found. Removing lines from ~/.bashrc...."
+		sed -i '/#bashquicks_begin/','/#bashquicks_end/d' $TARGET;
 		echo `source ~/.bashrc`
 		echo "done."
 		source ~/.bashrc # needed?
 	else
-		echo "Installation of bashful_rails not found!"
+		echo "Installation of bashquicks not found!"
 	fi
 
 fi

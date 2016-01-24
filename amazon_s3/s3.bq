@@ -1,10 +1,11 @@
 #!/bin/bash
-
 ######--------------------------------------------######
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
 
-source functions.bq.sh
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$DIR/../shared/bq_funcs.sh"
 
 help=" \
 Make bucket on HD   -> mbhd [name]    or on S3 -> mbs3 [name] or -> mbboth [name]\n \
@@ -123,9 +124,8 @@ ${BUCKET_LMHD_ARR[$i]},${BUCKET_ARGS_ARR[$i]},${BUCKET_DIRS_ARR[$i]},"
    alls3data[$i]="$temp"
    printf "\n $temp"
 done
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $DIR; cd ../; cd data
-printf "%s\n" "${alls3data[@]}" > alls3data.txt
+bucketdata=$(find `pwd` -name 'alls3data.txt' ! -path "*/.[!.]*");
+printf "%s\n" "${alls3data[@]}" > "$bucketdata"
 
 ################################################################################
 printf "\n\tDone gathering info, now displaying... \n"

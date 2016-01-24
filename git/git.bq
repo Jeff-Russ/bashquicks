@@ -1,5 +1,8 @@
 #!/bin/bash
-# save.bq
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
+# git.bq
 
 
 shopt -s nullglob dotglob     # To include hidden files. Needed?
