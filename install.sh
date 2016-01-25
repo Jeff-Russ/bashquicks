@@ -12,14 +12,14 @@ SOURCE="$DIR/z_res/bashrc_shim"
 print_welcome
 
 INS1_TOKEN="#MAGICWORD1DONTDELETE!"; INSERT1="BQ_PATH='$DIR'"
-sed -i "s|.*${INS1_TOKEN}.*|${INSERT1} ${INS1_TOKEN}|" $SOURCE
+sed -i '' "s|.*${INS1_TOKEN}.*|${INSERT1} ${INS1_TOKEN}|" $SOURCE
 
 INS2_TOKEN="#MAGICWORD2DONTDELETE!"
 timestamp=`date`; INSERT2="timestamp='${timestamp}'"
-sed -i "s|.*${INS2_TOKEN}.*|${INSERT2} ${INS2_TOKEN}|" $SOURCE
+sed -i '' "s|.*${INS2_TOKEN}.*|${INSERT2} ${INS2_TOKEN}|" $SOURCE
 
 search="-maxdepth 1 -mindepth 1 -type d"; no=" -not -path "
-OPT_DIRS=($(find $search $no'*.git*'$no'*z_*'$no'*bq'$no'*shared'))
+OPT_DIRS=($(find . $search $no'*.git*'$no'*z_*'$no'*bq'$no'*shared'))
 
 i=0; for x in "${OPT_DIRS[@]}"; do SELECTIONS[$i]="install"; i=$((i+1)); done
 
