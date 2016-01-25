@@ -4,8 +4,6 @@
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
 
-echo "  adding rails aliases from bashquicks"
-
 # r is for ruby or rails;  
 alias rbu='bundle update'                           # rbu rails: bundle update;  
 alias rbi='bundle install'                          # rbi rails: bundle install;  
@@ -27,3 +25,6 @@ alias rd='git push origin master; git push heroku master; heroku run rake db:mig
 
 #alias rd='rpa; gac "precompile asset for production. About to deploy"; gpo master;
 #    git push heroku master; heroku run rake db:migrate';  # rails deploy;
+
+
+echo "  Added rails aliases from bashquicks" >> $BQ_LOG

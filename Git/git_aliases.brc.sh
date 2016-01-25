@@ -4,8 +4,6 @@
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
 
-echo "  adding git aliases from bashquicks"
-
 gb_var_src(){
    b=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
    echo "Current branch name \"$b\" saved to \"\$b\""
@@ -46,3 +44,5 @@ alias gmt="git merge --no-commit --no-ff"   # git merge test
 alias gmu="git merge --abort"               # undo git merge test
 alias gb_var="gb_var_src"                   # saves branch name to $b 
 alias ngr='. ngr_src; ls -a'                # ngr navigate: git root;
+
+echo "  Added git aliases from bashquicks" >> $BQ_LOG

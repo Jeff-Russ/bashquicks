@@ -2,9 +2,6 @@
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
 
-echo "  adding custom bash prompt for git from bashquicks"
-
-
 function parse_git_branch {
   ref=$(git-symbolic-ref HEAD 2> /dev/null) || return
   echo "("${ref#refs/heads/}")"
@@ -60,3 +57,4 @@ prompt_git() {
 	fi;
 }
 
+echo "  Added custom bash prompt for git from bashquicks" >> $BQ_LOG
