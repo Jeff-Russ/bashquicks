@@ -39,6 +39,7 @@ alias gac='ga; git commit'                  # gace git add commit (editor);
 alias gp='git push'                         # gp git push;
 alias gphm='git push heroku master'         # gph git push heroku master;
 alias gpo='git push origin'                 # gpo git push origin;
+alias gar='allremotes_src'
 alias gpob='git push origin $b'             # gpo git push origin;
 alias gmt="git merge --no-commit --no-ff"   # git merge test
 alias gmu="git merge --abort"               # undo git merge test

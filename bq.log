@@ -1,4 +1,4 @@
-Installation on Mon Jan 25 01:30:32 EST 2016
+Installation on Mon Jan 25 05:02:04 EST 2016
 Location of source: /Users/Jeff/bashquicks
 
   Added to $PATH: bashquicks/AmazonS3/   chmod 777:  s3.bq s3_aliases.brc.sh s3mb s3pull s3rb s3rbf s3sad s3swd 
@@ -8,7 +8,7 @@ Location of source: /Users/Jeff/bashquicks
   Added to $PATH: bashquicks/Git/   chmod 777:  gacp git-prompt git.bq git_aliases.brc.sh git_prompt.brc.sh gr ngr_src 
   Added to $PATH: bashquicks/Rails/   chmod 777:  rail_aliases.brc.sh 
   Added to $PATH: bashquicks/shared/   chmod 777:  bq_funcs.sh 
-  Added to $PATH: bashquicks/z_res/   chmod 777:  bashrc_shim install_prompts.sh 
+  Added to $PATH: bashquicks/z_res/   chmod 777:  bashrc_shim get-pip.py install_prompts.sh 
 
 Running bashrc associated scripts:
   Added amazon s3 aliases

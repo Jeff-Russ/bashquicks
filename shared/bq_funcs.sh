@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # bq_funcs.sh
 
 ask() {
@@ -27,6 +27,25 @@ ask() {
       esac
    done
 }
+
+# usage: var=$(nonempty `which brew`)
+is_nonempty() { 
+   if [[ -z "$1" ]]; then echo "0"; 
+   else echo "1"; fi 
+}
+installedYN() { 
+   if [[ -z `which "$1"` ]]; then echo "0"; 
+   else echo "1"; fi 
+}
+nonemptyYN() { 
+   if [[ -z "$1" ]]; then echo "N"; 
+   else echo "Y"; fi 
+}
+installedYN() { 
+   if [[ -z `which "$1"` ]]; then echo "N"; 
+   else echo "Y"; fi 
+}
+
 
 find_abspaths() {
    WD=`pwd`; # insert in find to yield absolute paths

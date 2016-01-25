@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ######--------------------------------------------######
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
@@ -10,6 +10,9 @@ source "$DIR/z_res/install_prompts.sh"
 SOURCE="$DIR/z_res/bashrc_shim"
 
 print_welcome
+
+uname_str=`uname`
+if [[ "$uname_str" == "Darwin" ]]; then echo "Looks like you are on Mac OSX"; fi
 
 INS1_TOKEN="#MAGICWORD1DONTDELETE!"; INSERT1="BQ_PATH='$DIR'"
 sed -i '' "s|.*${INS1_TOKEN}.*|${INSERT1} ${INS1_TOKEN}|" $SOURCE

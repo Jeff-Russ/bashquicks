@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ######--------------------------------------------######
 ######  By Jeff Russ https://github.com/Jeff-Russ ######
 ######--------------------------------------------######
@@ -33,7 +33,7 @@ fi
 
 cd ~
 printf "  _______________________________________________________________________________\n"
-printf " /    bashquicks S3 command-line extensions!    by Jeff Russ   ctrl-c to exit \\ \n"
+printf " /    bashquicks S3 command-line extensions!    by Jeff Russ   ctrl-c to exit    \\ \n"
 printf " \_______________________________________________________________________________/\n"
 printf "\n\tAWS CLI found. Be sure you've run aws configure." 
 printf "\n\tGetting bucket names online, "
@@ -112,7 +112,7 @@ for i in "${!BUCKET_LOCATIONS[@]}"; do
          BUCKET_DIRS_ARR[i]="--- not found locally ---" # fields
        else
          BUCKET_DIRS_ARR[i]="--- CANDIDATE: ${untracked[i]}" # fields
-         BUCKET_LMHD_ARR[i]=`stat -c %z  ${untracked[i]}` # last modified
+         BUCKET_LMHD_ARR[i]=`stat -f %z  ${untracked[i]}` # last modified
          BUCKET_LMHD_ARR[i]=`chronostamp "${BUCKET_LMHD_ARR[i]}"`
       fi
    fi
@@ -124,7 +124,7 @@ ${BUCKET_LMHD_ARR[$i]},${BUCKET_ARGS_ARR[$i]},${BUCKET_DIRS_ARR[$i]},"
    alls3data[$i]="$temp"
    printf "\n $temp"
 done
-bucketdata=$(find `pwd` -name 'alls3data.txt' ! -path "*/.[!.]*");
+bucketdata=$(find . `pwd` -name 'alls3data.txt' ! -path "*/.[!.]*");
 printf "%s\n" "${alls3data[@]}" > "$bucketdata"
 
 ################################################################################
