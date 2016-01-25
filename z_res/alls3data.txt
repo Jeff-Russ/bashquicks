@@ -1,0 +1,4 @@
+0,jeffruss.com,0,--NOT ONS3!!,20160122160305, --acl public-read,/Users/Jeff/Downloads/workspace/jeffruss.com,
+1,jr.notes,0,--NOT ONS3!!,20160122160308, --acl private,/Users/Jeff/Downloads/workspace/jr.notes,
+2,jeffruss,0,--NOT ONS3!!,20160122160317, --acl public-read,/Users/Jeff/Downloads/workspace/public_s3/jeffruss,
+3,shared-img-res,0,--NOT ONS3!!,20160122160320, --acl public-read,/Users/Jeff/Downloads/workspace/public_s3/shared-img-res,

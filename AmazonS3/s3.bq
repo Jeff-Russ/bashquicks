@@ -52,7 +52,12 @@ for i in "${!bucket_files[@]}"; do
    BUCKET_DIRS_ARR[i]=`dirname "${bucket_files[i]}"` # home of ..s3bucket file
    BUCKET_NAME_ARR[i]=${bucket_info_arr[0]}          # name of bucket from file
    BUCKET_ARGS_ARR[i]="${bucket_info_arr[1]}" # ${bucket_info_arr[2]}" # permissions
-   BUCKET_LMHD_ARR[i]=`stat -c %z  ${BUCKET_DIRS_ARR[i]}`       # last modified
+   uname_str=`uname`
+   if [[ "$uname_str" == "Darwin" ]]; then 
+      BUCKET_LMHD_ARR[i]=`stat -f "%Sm" -t "%Y%m%dT%H%M%S" ${BUCKET_DIRS_ARR[i]}`       # last modified
+    else
+      BUCKET_LMHD_ARR[i]=`stat -c %z  ${BUCKET_DIRS_ARR[i]}`       # last modified
+   fi
    BUCKET_LMHD_ARR[i]=`chronostamp "${BUCKET_LMHD_ARR[i]}"`
 
    # if also found online:
@@ -122,7 +127,7 @@ for i in "${!SEL_N_ARR[@]}"; do
    temp="$i,${BUCKET_NAME_ARR[$i]},${BUCKET_LOCATIONS[$i]},${BUCKET_LMS3_ARR[$i]},\
 ${BUCKET_LMHD_ARR[$i]},${BUCKET_ARGS_ARR[$i]},${BUCKET_DIRS_ARR[$i]},"
    alls3data[$i]="$temp"
-   printf "\n $temp"
+   # printf "\n $temp"
 done
 bucketdata=$(find . `pwd` -name 'alls3data.txt' ! -path "*/.[!.]*");
 printf "%s\n" "${alls3data[@]}" > "$bucketdata"

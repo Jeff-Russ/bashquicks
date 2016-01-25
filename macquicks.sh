@@ -56,11 +56,35 @@ if [[ "$uname_str" == "Darwin" ]]; then echo "Looks like you are on Mac OSX"
    i=0; for key in "${!INSTALLS[@]}"; do
       printf -v j "%02d" $i
       k=$((i%2)); if (( k == 0)); then printf "\n"; fi
-      printf "\t\t| $j | ${INSTALLS[$key]} | $key "; i=$((i+1))
+      printf "\t\t     | ${INSTALLS[$key]} | $key "; i=$((i+1))
    done
 fi
 echo
 
+
+
+# w_coreutils="$(which coreutils)"
+# w_binutils="$(which binutils)"
+# w_diffutils="$(which diffutils)"
+# w_ed="$(which ed)"
+# w_findutils="$(which findutils)"
+# w_gawk="$(which gawk)"
+# w_gnu-indent="$(which gnu-indent)"
+# w_gnu-sed="$(which gnu-sed)"
+# w_gnu-tar="$(which gnu-tar)"
+# w_gnu-which="$(which gnu-which)"
+# w_gnutls="$(which gnutls)"
+# w_gprep="$(which grep)"
+# w_gzip="$(which gzip)"
+# w_screen="$(which screen)"
+# w_watch="$(which watch)"
+# w_wdiff="$(which wdiff)"
+# w_wget="$(which wget)"
+
+
+
+# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# brew update
 
 
 # # brew uninstall coreutils  # contain most of what you want
