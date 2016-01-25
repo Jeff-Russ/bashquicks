@@ -16,7 +16,7 @@ if ask "  ARE YOU SURE?  "; then
 
 	if grep -s $TOKEN $TARGET; then
 		echo "Installation of bashquicks found. Removing lines from ~/.bashrc...."
-		sed -i '/#bashquicks_begin/','/#bashquicks_end/d' $TARGET;
+		sed -i '' '/#bashquicks_begin/','/#bashquicks_end/d' $TARGET;
 		echo `source ~/.bashrc`
 		echo "done."
 		source ~/.bashrc # needed?

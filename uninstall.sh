@@ -18,7 +18,7 @@ if ask "  ARE YOU SURE?  "; then
 
 	if grep -s $TOKEN $TARGET; then
 		echo "Previous installation of bashful_rails found. Removing lines from ~/.bashrc...."
-		sed -i '/#bashquicks_begin/','/#bashquicks_end/d' $TARGET;
+		sed -i '' '/#bashquicks_begin/','/#bashquicks_end/d' $TARGET;
 	 else
 		echo "Previous installation of bashful_rails not found."
 	fi

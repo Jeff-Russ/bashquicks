@@ -1,4 +1,4 @@
-Installation on Mon Jan 25 01:13:25 EST 2016
+Installation on Mon Jan 25 01:30:32 EST 2016
 Location of source: /Users/Jeff/bashquicks
 
   Added to $PATH: bashquicks/AmazonS3/   chmod 777:  s3.bq s3_aliases.brc.sh s3mb s3pull s3rb s3rbf s3sad s3swd 

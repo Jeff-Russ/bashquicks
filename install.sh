@@ -75,7 +75,7 @@ test=`grep -s "$begin" "$HOME/.bashrc"`
 
 if [[ $test == $begin ]]; then 
    print_prev_install_notice
-   sed -i '/#bashquicks_begin/','/#bashquicks_end/d' "$HOME/.bashrc";
+   sed -i '' '/#bashquicks_begin/','/#bashquicks_end/d' "$HOME/.bashrc";
    print_done
 fi
 
