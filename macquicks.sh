@@ -11,6 +11,9 @@ print_welcome
 
 uname_str=`uname`
 if [[ "$uname_str" == "Darwin" ]]; then echo "Looks like you are on Mac OSX"
+   printf "adding ~/.bashrc to ~/.bash_profile... "
+   echo '[[ -s ~/.bashrc ]] && source ~/.bashrc;' >> ~/.bash_profile
+   printf "done."
    w_ruby="$(which ruby)"
    w_brew="$(which brew)"
    if [[ -z $w_ruby ]]; then 

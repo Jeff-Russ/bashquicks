@@ -1,7 +1,7 @@
-Installation on Mon Jan 25 05:23:00 EST 2016
+Installation on Mon Jan 25 13:35:05 EST 2016
 Location of source: /Users/Jeff/bashquicks
 
-  Added to $PATH: bashquicks/AmazonS3/   chmod 777:  s3.bq s3_aliases.brc.sh s3mb s3pull s3rb s3rbf s3sad s3swd 
+  Added to $PATH: bashquicks/AmazonS3/   chmod 777:  alls3data.txt s3.bq s3_aliases.brc.sh s3mb s3pull s3rb s3rbf s3sad s3swd 
   Added to $PATH: bashquicks/Bash/   chmod 777:  bash_aliases.brc.sh bash_prompt lsa trash 
   Added to $PATH: bashquicks/bq/   chmod 777:  admin.bq bq_aliases.brc.sh 
   Added to $PATH: bashquicks/c9.io/   chmod 777:  c9.brc.sh c9_aliases.brc.sh 

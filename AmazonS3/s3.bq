@@ -129,8 +129,9 @@ ${BUCKET_LMHD_ARR[$i]},${BUCKET_ARGS_ARR[$i]},${BUCKET_DIRS_ARR[$i]},"
    alls3data[$i]="$temp"
    # printf "\n $temp"
 done
-bucketdata=$(find . `pwd` -name 'alls3data.txt' ! -path "*/.[!.]*");
-printf "%s\n" "${alls3data[@]}" > "$bucketdata"
+# bucketdata=$(find . `pwd` -name 'alls3data.txt' ! -path "*/.[!.]*");
+touch alls3data.txt
+printf "%s\n" "${alls3data[@]}" > alls3data.txt
 
 ################################################################################
 printf "\n\tDone gathering info, now displaying... \n"
