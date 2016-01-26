@@ -8,18 +8,21 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$DIR/shared/bq_funcs.sh"
 source "$DIR/z_res/install_prompts.sh"
 SOURCE="$DIR/z_res/bashrc_shim"
+INS1_TOKEN="#MAGICWORD1DONTDELETE!"; INSERT1="BQ_PATH='$DIR'"
+INS2_TOKEN="#MAGICWORD2DONTDELETE!"
+timestamp=`date`; INSERT2="timestamp='${timestamp}'"
+uname_str=`uname`
 
 print_welcome
 
-uname_str=`uname`
-if [[ "$uname_str" == "Darwin" ]]; then echo "Looks like you are on Mac OSX"; fi
-
-INS1_TOKEN="#MAGICWORD1DONTDELETE!"; INSERT1="BQ_PATH='$DIR'"
-sed -i '' "s|.*${INS1_TOKEN}.*|${INSERT1} ${INS1_TOKEN}|" $SOURCE
-
-INS2_TOKEN="#MAGICWORD2DONTDELETE!"
-timestamp=`date`; INSERT2="timestamp='${timestamp}'"
-sed -i '' "s|.*${INS2_TOKEN}.*|${INSERT2} ${INS2_TOKEN}|" $SOURCE
+if [[ "$uname_str" == "Darwin" ]]; then 
+   echo "Looks like you are on Mac OSX You may need to run ./macquick.sh"; 
+   sed -i '' "s|.*${INS1_TOKEN}.*|${INSERT1} ${INS1_TOKEN}|" $SOURCE
+   sed -i '' "s|.*${INS2_TOKEN}.*|${INSERT2} ${INS2_TOKEN}|" $SOURCE
+ else
+   sed -i "s|.*${INS1_TOKEN}.*|${INSERT1} ${INS1_TOKEN}|" $SOURCE
+   sed -i "s|.*${INS2_TOKEN}.*|${INSERT2} ${INS2_TOKEN}|" $SOURCE
+fi
 
 search="-maxdepth 1 -mindepth 1 -type d"; no=" -not -path "
 OPT_DIRS=($(find . $search $no'*.git*'$no'*z_*'$no'*bq'$no'*shared'))
@@ -78,10 +81,15 @@ test=`grep -s "$begin" "$HOME/.bashrc"`
 
 if [[ $test == $begin ]]; then 
    print_prev_install_notice
-   sed -i '' '/#bashquicks_begin/','/#bashquicks_end/d' "$HOME/.bashrc";
+   if [[ "$uname_str" == "Darwin" ]]; then 
+      sed -i '' '/#bashquicks_begin/','/#bashquicks_end/d' "$HOME/.bashrc";
+    else
+      sed -i '/#bashquicks_begin/','/#bashquicks_end/d' "$HOME/.bashrc";
+   fi
    print_done
 fi
 
+# this line does all the heavy lifting:
 print_inserting; cat $SOURCE >> "$HOME/.bashrc"; print_done; print_reload_bash
 
 sleep 1; print_install_complete; sleep 0.5; exec bash
