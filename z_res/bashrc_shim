@@ -37,4 +37,16 @@ BRC_SH_PATHS=($(find $BQ_PATH -name "*brc.sh" ! -path "*/.[!.]*"))
 printf "\n\nRunning bashrc associated scripts:\n"  >> $BQ_LOG
 for brc_sh_path in "${BRC_SH_PATHS[@]}"; do  . $brc_sh_path; done
 
+uname_str=`uname`
+if [[ "$uname_str" == "Darwin" ]]; then
+
+	# the following is to install the kate editor 
+	export KDEDIRS=$KDEDIRS:$HOME/Library/Preferences/KDE:/usr/local/kde4
+	export PATH=/usr/local/kde4/bin:$PATH
+	export DYLD_LIBRARY_PATH=/usr/local/kde4/lib:$DYLD_LIBRARY_PATH
+	launchctl setenv DYLD_LIBRARY_PATH /usr/local/kde4/lib:$DYLD_LIBRARY_PATH
+	export XDG_DATA_HOME=$HOME/Library/Preferences/KDE/share
+	export XDG_DATA_DIRS=/usr/local/kde4/share:/usr/local/share:/usr/share
+fi
+
 #bashquicks_end
