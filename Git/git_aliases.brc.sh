@@ -46,4 +46,6 @@ alias gmu="git merge --abort"               # undo git merge test
 alias gb_var="gb_var_src"                   # saves branch name to $b 
 alias ngr='. ngr_src; ls -a'                # ngr navigate: git root;
 
+alias gra='git remote add'
+
 echo "  Added git aliases from bashquicks" >> $BQ_LOG

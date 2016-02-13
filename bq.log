@@ -1,21 +1,42 @@
-Installation on Tue Jan 26 02:11:00 UTC 2016
-Location of source: /home/ubuntu/workspace/bashquicks
+Installation on Fri Feb  5 19:01:34 UTC 2016
+Location of source: /home/ubuntu/bashquicks
 
-  Added to $PATH: bashquicks/z_res/   chmod 777:  install_prompts.sh bashrc_shim 
-  Added to $PATH: bashquicks/bq/   chmod 777:  bq_aliases.brc.sh admin.bq 
-  Added to $PATH: bashquicks/AmazonS3/   chmod 777:  s3sad s3rbf s3mb alls3data.txt s3swd s3_aliases.brc.sh s3.bq s3rb s3pull 
-  Added to $PATH: bashquicks/c9.io/   chmod 777:  c9.brc.sh c9_aliases.brc.sh 
-  Added to $PATH: bashquicks/Rails/   chmod 777:  rail_aliases.brc.sh 
-  Added to $PATH: bashquicks/Git/   chmod 777:  git.bq ngr_src git_aliases.brc.sh gr git-prompt git_prompt.brc.sh gacp 
-  Added to $PATH: bashquicks/shared/   chmod 777:  bq_funcs.sh 
-  Added to $PATH: bashquicks/Bash/   chmod 777:  bash_prompt trash lsa bash_aliases.brc.sh 
+  Added to $PATH: bashquicks/z_res/   
+  Added to $PATH: bashquicks/z_res/   chmod 777:  install_prompts.sh chmod 777:  install_prompts.sh bashrc_shim bashrc_shim 
+  Added to $PATH: bashquicks/bq/   
+  Added to $PATH: bashquicks/bq/   chmod 777:  admin.bq bq_aliases.brc.sh chmod 777:  admin.bq bq_aliases.brc.sh 
+  Added to $PATH: bashquicks/osx/   
+  Added to $PATH: bashquicks/osx/   chmod 777:  appify.sh 
+  Added to $PATH: bashquicks/Bash/   chmod 777:  appify.sh chmod 777:  bash_aliases.brc.sh 
+  Added to $PATH: bashquicks/Bash/   bash_prompt lsa chmod 777:  bash_aliases.brc.sh trash 
+  Added to $PATH: bashquicks/AmazonS3/   bash_prompt chmod 777:  alls3data.txt lsa trash s3rb 
+  Added to $PATH: bashquicks/AmazonS3/   s3.bq chmod 777:  alls3data.txt s3rb s3sad s3.bq s3pull s3sad s3_aliases.brc.sh s3pull s3rbf s3mb s3_aliases.brc.sh s3swd s3rbf 
+  Added to $PATH: bashquicks/Git/   chmod 777:  git_aliases.brc.sh gr git_prompt.brc.sh gacp s3mb ngr_src git.bq git-prompt s3swd 
+  Added to $PATH: bashquicks/c9.io/   
+  Added to $PATH: bashquicks/Git/   chmod 777:  chmod 777:  c9_aliases.brc.sh git_aliases.brc.sh c9.brc.sh gr 
+  Added to $PATH: bashquicks/shared/   git_prompt.brc.sh gacp ngr_src chmod 777:  bq_funcs.sh git.bq 
+  Added to $PATH: bashquicks/Rails/   git-prompt 
+  Added to $PATH: bashquicks/c9.io/   chmod 777:  rail_aliases.brc.sh chmod 777:  c9_aliases.brc.sh c9.brc.sh 
+  Added to $PATH: bashquicks/shared/   
+
+Running bashrc associated scripts:
+chmod 777:  bq_funcs.sh   Added bq aliases from bashquicks
+
+  Added to $PATH: bashquicks/Rails/     Added bash aliases from bashquicks
+chmod 777:  rail_aliases.brc.sh   Added amazon s3 aliases
+  Added git aliases from bashquicks
+
 
 Running bashrc associated scripts:
   Added bq aliases from bashquicks
+  Added bash aliases from bashquicks
   Added amazon s3 aliases
-  Made c9 the default editor
-  Added c9 aliases from bashquicks
-  Added rails aliases from bashquicks
   Added git aliases from bashquicks
   Added custom bash prompt for git from bashquicks
-  Added bash aliases from bashquicks
+  Added c9 aliases from bashquicks
+  Added custom bash prompt for git from bashquicks
+  Added c9 aliases from bashquicks
+  Made c9 the default editor
+  Made c9 the default editor
+  Added rails aliases from bashquicks
+  Added rails aliases from bashquicks

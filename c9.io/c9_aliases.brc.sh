@@ -8,6 +8,8 @@
 # alias bqea='c9 ~/bashquicks/resources/bash_aliases' # bq edit aliases;
 # alias bqns='cd ~/bashquicks/scripts; bqns_src' # create a new empty script and open in c9 
 
+alias c9='c9 open'
+
 # c9 is for the Cloud9 Ace editor;
 alias gc9='git config --global core.editor "c9 --wait"' # git: c9 for commit messages
 alias c9brc='c9 ~/.bashrc'                              # edit bash resources;

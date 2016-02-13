@@ -18,7 +18,7 @@ alias rdm='bundle exec rake db:migrate'             # rr rake migrate;
 alias rc='bundle exec rails console'                # rc  rails console;  
 alias rhc='heroku run rails console'                # rhc rails heroku console;    
 alias rs='bundle exec rails server -p $PORT -b $IP' # rs  rails server; 
-alias rac='be rake assets:clean'                    # rails assets clean;
+alias rac='be rake assets:clobber'                  # rails assets clobber;
 alias rap='be rake assets:precompile RAILS_ENV=production;
 be rake assets:precompile RAILS_ENV=development' # rails assets precomile;
 alias rd='git push origin master; git push heroku master; heroku run rake db:migrate' # rails deploy;
