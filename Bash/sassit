@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+mkdir -p css_out;
+
+if [ -z "$1" ]
+ then OUT=$2;
+ else OUT=$1;
+fi
+INPUT="${1}.scss";
+FULL_OUT="css_out/${OUT}-full.css";
+MIN_OUT="css_out/${OUT}.min.css";
+NORM_OUT="css_out/${OUT}.css";
+
+touch $FULL_OUT $MIN_OUT $NORM_OUT;
+sass $INPUT $FULL_OUT;
+uglifycss $INPUT > $MIN_OUT;
+# cssbeautify-cli -i2 -f "css_out/${1}.min.css" > "css_out/${1}.css";
+cssunminifier $MIN_OUT $NORM_OUT;

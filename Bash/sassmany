@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+mkdir -p css_out;
+
+for VAR in "$@"; do
+    sassit $VAR;
+done

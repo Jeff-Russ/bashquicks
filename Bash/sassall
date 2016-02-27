@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+mkdir -p css_out;
+
+for INPUT in *.scss; 
+do
+	NAME=$(basename $INPUT);
+	NAME="${NAME%%.*}";
+	if [[ $NAME == _* ]]; then NAME=${NAME:1}; fi
+	
+	FULL_OUT="css_out/${NAME}-full.css";
+	MIN_OUT="css_out/${NAME}.min.css";
+	NORM_OUT="css_out/${NAME}.css";
+	touch $FULL_OUT $MIN_OUT $NORM_OUT;
+	
+	sass $INPUT $FULL_OUT;
+	uglifycss $INPUT > $MIN_OUT;
+	cssunminifier $MIN_OUT $NORM_OUT;
+done
