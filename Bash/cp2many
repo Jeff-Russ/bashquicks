@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+for OUT in ${@:2}; do
+    cp $1 "$OUT";
+done
