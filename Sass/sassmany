@@ -23,3 +23,5 @@ mkdir -p css_out;
 for VAR in "$@"; do
     sassit $VAR;
 done
+
+sassdirs;

@@ -31,6 +31,8 @@ NORM_OUT="css_out/${OUT}.css";
 
 touch $FULL_OUT $MIN_OUT $NORM_OUT;
 sass $INPUT $FULL_OUT;
-uglifycss $INPUT > $MIN_OUT;
+uglifycss $FULL_OUT > $MIN_OUT;
 # cssbeautify-cli -i2 -f "css_out/${1}.min.css" > "css_out/${1}.css";
 cssunminifier $MIN_OUT $NORM_OUT;
+
+sassdirs;

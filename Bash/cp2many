@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
+# cp2many - copy one file to many new file
+# first arg is file to be copied, second is output directory and the rest are the names
 
-for OUT in ${@:2}; do
-    cp $1 "$OUT";
+mkdir -p "$2";
+
+for OUT in ${@:3}; do
+    cp $1 "$2$OUT";
 done

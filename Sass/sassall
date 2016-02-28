@@ -18,6 +18,8 @@ do
 done
 
 mkdir -p css_out;
+mkdir -p css_out/min;
+mkdir -p css_out/full;
 
 for INPUT in *.scss; 
 do
@@ -31,6 +33,8 @@ do
 	touch $FULL_OUT $MIN_OUT $NORM_OUT;
 	
 	sass $INPUT $FULL_OUT;
-	uglifycss $INPUT > $MIN_OUT;
+	uglifycss $FULL_OUT > $MIN_OUT;
 	cssunminifier $MIN_OUT $NORM_OUT;
 done
+
+sassdirs;

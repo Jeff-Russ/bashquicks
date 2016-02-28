@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# sassdirs.sh - script used by other scripts only
+
+cd css_out;
+mkdir -p map min full;
+
+for FILE in *.map; do
+    FILE=$(basename $FILE);
+    mv $FILE "map/$FILE"
+done
+for FILE in *min.css; do
+    FILE=$(basename $FILE);
+    mv $FILE "min/$FILE"
+done
+for FILE in *-full.css; do
+    FILE=$(basename $FILE);
+    mv $FILE "full/$FILE"
+done
