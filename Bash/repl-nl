@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# repl-nl
+
+if [ $# -eq 0 ]; then
+    echo "repl-nl - replace newlines in file with a delimiter"
+    echo "usage: repl-nl [filename] [delimiter(optional)]"
+    echo "Replaces /n with [delimiter] or a space (default)"
+    echo "repl-nl is similar to dsv only it doesn't strip any whitespace"
+    echo "a backup file is always created"
+    exit 1
+fi
+
+SEP=" ";
+if [ -n "$2" ]; then SEP=$2; fi
+
+FILE=$1;
+cp $FILE "${FILE}.bak";
+STR=`cat $FILE`
+STR=`printf "$STR" | tr "\n" "${SEP}"`;
+echo "${STR}" > $FILE;

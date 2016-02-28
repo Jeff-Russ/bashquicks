@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# striptabs
+
+if [ $# -eq 0 ]; then
+    echo "striptabs - removes any whitespace at the start of each line"
+    echo "usage: striptabs [filename]"
+    echo "a backup file is always created"
+    exit 1
+fi
+FILE=$1;
+cp $FILE "${FILE}.bak"
+sed -i 's/^[[:blank:]]*//g' $FILE;

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# linenum
+
+if [ $# -eq 0 ]; then
+    echo "linenum - append each line in a file with it's line number"
+    echo "usage: linenum [filename] [separator(optional)]"
+    echo "a backup file is always created"
+    exit 1
+fi
+
+SEP="SOuRGuY";
+if [ -n "$2" ]; then SEP=$2; fi
+
+# echo $SEP;
+FILE=$1;
+cp $FILE "${FILE}.bak"
+TEMP="";
+TEMP=`nl -w1 -s"${SEP}" $FILE`;
+TEMP=`sed "s/SOuRGuY//g" <<< "${TEMP}"`;
+printf "$TEMP" > "${FILE}";
+# tr -d "\t" < "numbered-${FILE}" > "numbered-${FILE}";
+#> "numbered-${FILE}";
+# > "numbered-${FILE}";
+# > $FILE;
+
+# tr -d '\040\011\012\015'
+
+
+
+# awk "{$1 < '"%d%s\n"', NR, $0}" < $1;

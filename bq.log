@@ -1,4 +1,4 @@
-Installation on Sat Feb 27 20:50:21 UTC 2016
+Installation on Sun Feb 28 04:25:23 UTC 2016
 Location of source: /home/ubuntu/bashquicks
 
   Added to $PATH: bashquicks/c9.io/   chmod 777:  c9.brc.sh c9_aliases.brc.sh 
@@ -7,7 +7,7 @@ Location of source: /home/ubuntu/bashquicks
   Added to $PATH: bashquicks/AmazonS3/   chmod 777:  s3mb s3swd alls3data.txt s3_aliases.brc.sh s3sad s3.bq s3rbf s3rb s3pull 
   Added to $PATH: bashquicks/z_res/   chmod 777:  install_prompts.sh bashrc_shim 
   Added to $PATH: bashquicks/shared/   chmod 777:  bq_funcs.sh 
-  Added to $PATH: bashquicks/Bash/   chmod 777:  bash_aliases.brc.sh cp2many bash_prompt trash lsa 
+  Added to $PATH: bashquicks/Bash/   chmod 777:  bash_aliases.brc.sh cp2many bash_prompt trash dsv lsa striptabs linenum striptrails repl-nl 
   Added to $PATH: bashquicks/Git/   chmod 777:  gacp git_aliases.brc.sh git.bq git_prompt.brc.sh git-prompt ngr_src gr 
   Added to $PATH: bashquicks/Sass/   chmod 777:  sassmany sassit sassall 
   Added to $PATH: bashquicks/Rails/   chmod 777:  rail_aliases.brc.sh 

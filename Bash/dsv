@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# dsv - delimiter separated values.
+# convert 
+
+if [ $# -eq 0 ]; then
+    echo "dsv - delimiter separated values"
+    echo "usage: dsv [filename] [delimiter(optional)]"
+    echo "Replaces /n with [delimiter] or a space (default)"
+    echo "whitespace at the start and end of each lines is stripped"
+    echo "a backup file is always created"
+    exit 1
+fi
+
+FILE=$1;
+SEP=" ";
+if [ -n "$2" ]; then SEP=$2; fi
+
+cp $FILE "${FILE}.bak"
+
+sed -i 's/^[[:blank:]]*//g' $FILE;
+sed -i 's/[[:blank:]]*$//g' $FILE;
+STR=`cat $FILE`
+STR=`printf "$STR" | tr "\n" "${SEP}"`;
+echo "${STR}" > $FILE;
+
