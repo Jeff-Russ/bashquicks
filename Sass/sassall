@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# sassall
+function help {
+    echo "sassall - takes no args, converts all .scss in working dir to css files"
+    echo "A folder called css_out will be the home of all generated css and maps"
+    echo "normal, minified and fully commented versions are created in this file"
+    echo "output filenames will match sources (todo:  have _ append removed)"
+    echo "extensions will be .min.css .css and -full.css"
+}
+while [ ! $# -eq 0 ]
+do
+    case "$1" in
+        --help | -h)
+            helpmenu
+            exit
+            ;;
+    esac
+done
+
+mkdir -p css_out;
+mkdir -p css_out/min;
+mkdir -p css_out/full;
+
+for INPUT in *.scss; 
+do
+	NAME=$(basename $INPUT);
+	NAME="${NAME%%.*}";
+	if [[ $NAME == _* ]]; then NAME=${NAME:1}; fi
+	
+	FULL_OUT="css_out/${NAME}-full.css";
+	MIN_OUT="css_out/${NAME}.min.css";
+	NORM_OUT="css_out/${NAME}.css";
+	touch $FULL_OUT $MIN_OUT $NORM_OUT;
+	
+	sass $INPUT $FULL_OUT;
+	uglifycss $FULL_OUT > $MIN_OUT;
+	cssunminifier $MIN_OUT $NORM_OUT;
+done
+
+sassdirs;

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# sassit
+function help {
+    echo "sassit - takes no args, converts all .scss in working dir to css files"
+    echo "usage: sassit [filename(no ext)] [out-filename(no ext)]"
+    echo "A folder called css_out will be the home of all generated css and maps"
+    echo "normal, minified and fully commented versions are created for all"
+    echo "output filenames will match sources if no second arg is supplied"
+    echo "extensions will be .min.css .css and -full.css"
+}
+while [ ! $# -eq 0 ]
+do
+    case "$1" in
+        --help | -h | -help)
+            help;
+            exit 1
+            ;;
+    esac
+done
+
+mkdir -p css_out;
+
+if [ -z "$2" ]
+ then OUT=$1;
+ else OUT=$2;
+fi
+INPUT="${1}.scss";
+FULL_OUT="css_out/${OUT}-full.css";
+MIN_OUT="css_out/${OUT}.min.css";
+NORM_OUT="css_out/${OUT}.css";
+
+touch $FULL_OUT $MIN_OUT $NORM_OUT;
+sass $INPUT $FULL_OUT;
+uglifycss $FULL_OUT > $MIN_OUT;
+# cssbeautify-cli -i2 -f "css_out/${1}.min.css" > "css_out/${1}.css";
+cssunminifier $MIN_OUT $NORM_OUT;
+
+sassdirs;

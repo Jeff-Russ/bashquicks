@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# striptrails
+
+if [ $# -eq 0 ]; then
+    echo "striptrails - removes any whitespace at the ends of each line"
+    echo "usage: striptrails [filename]"
+    echo "a backup file is always created"
+    exit 1
+fi
+
+FILE=$1;
+cp $FILE "${FILE}.bak"
+sed -i 's/[[:blank:]]*$//g' $FILE;
