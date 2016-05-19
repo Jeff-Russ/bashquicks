@@ -23,6 +23,7 @@ if [[ "$uname_str" == "Darwin" ]]; then echo "Looks like you are on Mac OSX"
    if [[ -z $w_brew ]]; then
       printf "You need Homebrew to install packages on OSX. Doing that now... "
       ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      export PATH="/usr/local/bin:$PATH"
       printf "done.\n"
    fi
    printf "Seeing about Homebrew updates... "; brew update; printf "done."

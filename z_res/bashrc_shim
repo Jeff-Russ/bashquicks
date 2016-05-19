@@ -5,8 +5,8 @@
 ######--------------------------------------------######
 
 # the content before MAGICWORDDONTDELETE comment will be replaced with installer
-BQ_PATH='/home/ubuntu/workspace/bashquicks' #MAGICWORD1DONTDELETE!
-timestamp='Tue Jan 26 02:11:00 UTC 2016' #MAGICWORD2DONTDELETE!
+BQ_PATH='/Users/Jeff/workspace/bashquicks' #MAGICWORD1DONTDELETE!
+timestamp='Tue Jan 26 01:11:26 EST 2016' #MAGICWORD2DONTDELETE!
 
 export BQ_LOG="$BQ_PATH/bq.log"; touch $BQ_LOG; stamp=`date`
 printf "Installation on ${timestamp}\nLocation of source: ${BQ_PATH}\n" > $BQ_LOG # clear log
@@ -14,16 +14,16 @@ printf "Installation on ${timestamp}\nLocation of source: ${BQ_PATH}\n" > $BQ_LO
 # Add all directories (-maxdepth 3) found in bashquicks/ to $PATH:
 BQ_SUBDIRS=($(find $BQ_PATH -maxdepth 3 -mindepth 1 -type d -not -path '*/\.*'))
 
-for bq_subdir in "${BQ_SUBDIRS[@]}"; do 
-    
-    printf "\n  Added to \$PATH: bashquicks${bq_subdir##*bashquicks}/   " >> $BQ_LOG
+for bq_subdir in "${BQ_SUBDIRS[@]}"; do
+
+    printf "\n  Added to \$PATH: bashquicks${bq_subdir##*bashquicks}/   "  >> $BQ_LOG
     PATH=$PATH:$bq_subdir;
-    
+
     bq_subdir_files=($(find $bq_subdir -type f ! -path "*/.[!.]*"))
     printf "chmod 777:  " >> $BQ_LOG
-    
-    for file in "${bq_subdir_files[@]}"; do 
-    
+
+    for file in "${bq_subdir_files[@]}"; do
+
         printf "${file##*/} " >> $BQ_LOG
         chmod 777  "$file"
     done
@@ -40,7 +40,7 @@ for brc_sh_path in "${BRC_SH_PATHS[@]}"; do  . $brc_sh_path; done
 uname_str=`uname`
 if [[ "$uname_str" == "Darwin" ]]; then
 
-	# the following is to install the kate editor 
+	# the following is to install the kate editor
 	export KDEDIRS=$KDEDIRS:$HOME/Library/Preferences/KDE:/usr/local/kde4
 	export PATH=/usr/local/kde4/bin:$PATH
 	export DYLD_LIBRARY_PATH=/usr/local/kde4/lib:$DYLD_LIBRARY_PATH
