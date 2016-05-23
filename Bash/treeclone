@@ -1,0 +1,23 @@
+#!/bin/sh
+# treeclone - pretty much just a wrapper around cp but only for cloning the 
+# CONTENTS of a directory (via /. ) recursively (-a) and non-destructive (-n) 
+# by default. Useful for preventing disaster from forgetting -n
+
+if   [ "$#" -eq 1 ]; then TO=$CALLER
+elif [ "$#" -lt 4 ]; then TO=$2
+else
+  echo "incorrect number of args: treeclone takes at 1 - 3 args"
+  echo "This will copy all file and directories recursively but not overwrite anything:"
+  echo "  $ treeclone <from-dir> <to-dir>"
+  echo "this will overwrite:"
+  echo "  $ treeclone <from-dir> <to-dir> -f"
+  echo "Both paths can be relative and if there is only one argument, it defines"
+  echo "the source with the desination assumed to be the current directory."
+  exit 1
+fi
+
+if [ "$3" == "-f" ]; then
+  cp -a $1/. $TO/
+else 
+  cp -an $1/. $TO/
+fi
