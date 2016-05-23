@@ -14,11 +14,12 @@ alias nh='cd ~/; ls -a'          # nh  navigate: home;
 alias nw='cd ~/workspace; ls -a' # nw  navigate: workspace;
 alias ngr='. ngr_src; ls -a'     # ngr navigate: git root;
 
-
 alias ls='ls -G'
 alias grep='grep -G'
 alias fgrep='fgrep -G'
 alias egrep='egrep -G'
+alias files="ls -apl | grep -v '/$'"
+alias folders="ls -apld"
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'

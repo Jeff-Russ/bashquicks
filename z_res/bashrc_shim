@@ -5,13 +5,8 @@
 ######--------------------------------------------######
 
 # the content before MAGICWORDDONTDELETE comment will be replaced with installer
-<<<<<<< HEAD
 BQ_PATH='/Users/Jeff/workspace/bashquicks' #MAGICWORD1DONTDELETE!
 timestamp='Tue Jan 26 01:11:26 EST 2016' #MAGICWORD2DONTDELETE!
-=======
-BQ_PATH='/home/ubuntu/bashquicks' #MAGICWORD1DONTDELETE!
-timestamp='Sun Feb 28 04:25:23 UTC 2016' #MAGICWORD2DONTDELETE!
->>>>>>> eb55750525e65909378037ad652b7cb6daa4dd7b
 
 export BQ_LOG="$BQ_PATH/bq.log"; touch $BQ_LOG; stamp=`date`
 printf "Installation on ${timestamp}\nLocation of source: ${BQ_PATH}\n" > $BQ_LOG # clear log
