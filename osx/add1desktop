@@ -1,0 +1,18 @@
+#!/bin/bash
+# adds another desktop in mac os
+
+# IMPORTANT: you will likely get the following error:
+
+#   execution error: System Events got an error: osascript is not allowed assistive access. (-1719)
+
+# As far as I know, there is no way to grant a script assistive access but this
+# script is provided anyway since you can create an app in automator that 
+# uses this script which can be granted assitive access in mac osx prefs
+
+open -a 'Mission Control'
+osascript <<'END'
+delay 0.5
+tell application "System Events" to click (every button whose value of attribute "AXDescription" is "add desktop") of group 1 of process "Dock"
+delay 0.5
+tell application "System Events" to key code 53
+END

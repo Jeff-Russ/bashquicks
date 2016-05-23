@@ -2,11 +2,12 @@ Installation on Tue Jan 26 01:11:26 EST 2016
 Location of source: /Users/Jeff/workspace/bashquicks
 
   Added to $PATH: bashquicks/AmazonS3/   chmod 777:  alls3data.txt s3.bq s3_aliases.brc.sh s3mb s3pull s3rb s3rbf s3sad s3swd 
-  Added to $PATH: bashquicks/Bash/   chmod 777:  bash_aliases.brc.sh bash_prompt cp2many dsv linenum lsa repl-nl striptabs striptrails trash 
+  Added to $PATH: bashquicks/Bash/   chmod 777:  bash_aliases.brc.sh bash_prompt cp2many dsv linenum lsa repl-nl striptabs striptrails trash treeclone 
   Added to $PATH: bashquicks/bq/   chmod 777:  admin.bq bq_aliases.brc.sh 
   Added to $PATH: bashquicks/c9.io/   chmod 777:  c9.brc.sh c9_aliases.brc.sh 
   Added to $PATH: bashquicks/Git/   chmod 777:  gacp git-prompt git.bq git_aliases.brc.sh git_prompt.brc.sh gr ngr_src 
-  Added to $PATH: bashquicks/osx/   chmod 777:  appify 
+  Added to $PATH: bashquicks/osx/   chmod 777:  add1desktop add2desktops add3desktops appify closeall fixuser openwith openwith-brack-term openwith-subl-term osx_aliases.brc.sh run_in_bg togglehidden 
+  Added to $PATH: bashquicks/osx/automator/   chmod 777:  
   Added to $PATH: bashquicks/Rails/   chmod 777:  rail_aliases.brc.sh 
   Added to $PATH: bashquicks/Sass/   chmod 777:  sassall sassdirs sassit sassmany 
   Added to $PATH: bashquicks/shared/   chmod 777:  bq_funcs.sh 

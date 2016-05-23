@@ -1,0 +1,30 @@
+#!/bin/bash
+
+help_string=$(cat <<EOF
+openwith Usage:
+openwith appname <files>...
+
+Instantly have a shell command for any app so you can open files with it at
+the command line args 2 through infinity are whatever items you want to open
+with the app specified as arg 1. Use quotes for appname if it has spaces.
+
+You can also just have one arg to simply open the app.
+
+TODO: add some kind of regex driven did-you-mean? added
+EOF
+)
+
+appname="$1"
+
+if [ "$#" -eq 1 ]; then
+  open "/Applications/$appname.app"
+elif [ "$#" -gt 1 ]; then
+
+  shift
+  for f in "$@"; do
+    open -a "/Applications/$appname.app" "$f"
+  done
+else
+  printf "$help_string"
+fi
+

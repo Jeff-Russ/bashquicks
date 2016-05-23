@@ -1,0 +1,31 @@
+#!/bin/bash
+# open a directory as a project in Brackets with a terminal
+# requires Moom window manipulator for mac os but could be modified
+# to not use it or use something else.
+
+# NOTE that the keystroke part is for Moom as well. It tells Moom 
+# to resize and arrange the two windows nicely. 
+
+# this is probably not as useful as a terminal where you can just run `brackets`.
+# However, you can create an service in automator that uses this script 
+# which give you a right click option in finder.
+
+for f in "$@"
+do
+	open -a "/Applications/.Brackets.app" "$f"
+	open -a terminal "$f"
+done
+
+osascript <<'END'
+
+tell application "Moom"
+	if it is not running then
+		activate
+	end if
+end tell
+
+tell application "System Events"
+	keystroke "e" using option down
+end tell
+
+END

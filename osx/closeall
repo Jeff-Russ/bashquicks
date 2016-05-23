@@ -1,0 +1,19 @@
+#!/bin/bash
+# closeall is a workflow enhancer that just closes all mac os apps
+
+# it's great when you are about to begin working and you want to clear 
+# out all of the distractions.
+
+# If you try to execute this as bash script you'll probably get an 
+# are-you-sure dialog from terminal which might prevent proceeding to
+# closing other apps. I actually never use closeall that way, I make 
+# an app in automator that includes this script as applescript. 
+
+osascript <<'END'
+tell application "System Events" to set quitapps to name of every application process whose visible is true and name is not "Finder"
+repeat with closeall in quitapps
+quit application closeall
+end repeat
+
+tell application "Finder" to close every window
+END

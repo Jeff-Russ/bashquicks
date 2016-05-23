@@ -1,0 +1,10 @@
+#!/bin/bash
+# this is probably not useful as a bash script. However, 
+# you can create an service in automator that uses this script which
+# give you a right click option for opening executing one or many scripts
+# without opening terminal. You can even assign it to a key command.
+
+for f in "$@"
+do
+  exec "$f"
+done

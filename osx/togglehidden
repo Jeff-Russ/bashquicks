@@ -1,0 +1,19 @@
+#!/bin/bash
+#toggle AppleShowAllFiles
+
+status=`defaults read com.apple.finder AppleShowAllFiles`
+
+if [ $status = "YES" ]; then
+
+	echo "Hiding was OFF. Now hiding..."
+	defaults write com.apple.finder AppleShowAllFiles NO
+	echo "Hiding is now ON. Restarting Finder..."
+	osascript -e 'display notification "Finder Hiding turned ON" with title "toggleHidden"'
+else
+	echo "Hiding was ON. Now unhiding..."
+	defaults write com.apple.finder AppleShowAllFiles YES
+	echo "Hiding is now OFF. Restarting Finder..."
+	osascript -e 'display notification "Finder Hiding turned OFF" with title "toggleHidden"'
+fi
+
+killall Finder
