@@ -1,0 +1,30 @@
+#!/bin/bash
+# fix user permissions for OSX home folder
+
+if [ -z "$1" ]; then
+	path="$HOME"
+	echo; echo "No argument supplied... assuming working $path"
+else
+	path="$1"
+fi
+
+public="$HOME/Public"
+sites="$HOME/Sites"
+
+echo; "Setting $path contents to default user permissions"
+chmod -R go-rwx,u+rw "$path"
+
+if [ -d "$public" ]; then
+	echo; echo "Making $public readable but group and other"
+	chmod go+r-wx,u+rw "$public"
+fi
+
+if [ -d "$sites" ]; then
+	echo; echo "Making $sites readable but group and other"
+	chmod go+r-wx,u+rw "$sites"
+fi
+
+echo "Setting $path itself to default user permissions"
+chmod go-rwx,u+rw "$path"
+
+echo "Complete!"
